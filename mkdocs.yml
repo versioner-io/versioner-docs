@@ -1,0 +1,147 @@
+site_name: Versioner Documentation
+site_url: https://docs.versioner.io
+site_description: Deployment tracking and visibility for engineering teams
+site_author: Versioner Team
+repo_url: https://github.com/versioner-io/versioner-docs
+repo_name: versioner-io/versioner-docs
+
+# Only build from the public/ directory
+docs_dir: public
+site_dir: site
+
+# Theme configuration
+theme:
+  name: material
+  logo: assets/versioner-logo.png
+  favicon: assets/versioner-logo.png
+  palette:
+    # Dark mode (default)
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to light mode
+    # Light mode
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to dark mode
+  font:
+    text: Roboto
+    code: Roboto Mono
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - navigation.tracking
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.code.annotate
+  icon:
+    repo: fontawesome/brands/github
+
+# Navigation structure
+nav:
+  - Home: index.md
+  - Getting Started: getting-started.md
+  - Integrations:
+      - Overview: integrations/index.md
+      - GitHub Action: integrations/github-action.md
+  - CLI:
+      - Overview: cli/index.md
+      - Installation: cli/installation.md
+      - Commands: cli/commands.md
+      - CI/CD Integration: cli/ci-cd-systems.md
+      - Configuration: cli/configuration.md
+  - API:
+      - Overview: api/index.md
+      - Authentication: api/authentication.md
+      - Event Tracking: api/event-tracking.md
+      - Event Types: api/event-types.md
+      - Interactive Docs: api/interactive-docs.md
+      - Response Codes: api/response-codes.md
+  - Concepts:
+      - Overview: concepts/index.md
+      - Products: concepts/products.md
+      - Versions: concepts/versions.md
+      - Deployments: concepts/deployments.md
+      - Releases: concepts/releases.md
+      - Environments: concepts/environments.md
+      - Notifications: concepts/notifications.md
+
+# Markdown extensions
+markdown_extensions:
+  # Admonitions (callouts)
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+  # Code highlighting
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+
+  # Tabbed content
+  - pymdownx.tabbed:
+      alternate_style: true
+
+  # Task lists
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+  # Emoji support
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+  # Tables
+  - tables
+
+  # Table of contents
+  - toc:
+      permalink: true
+      toc_depth: 3
+
+  # Footnotes
+  - footnotes
+
+  # Abbreviations
+  - abbr
+  - attr_list
+  - md_in_html
+
+# Plugins
+plugins:
+  - search:
+      lang: en
+  - git-revision-date-localized:
+      enable_creation_date: true
+      type: timeago
+
+# Extra configuration
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/versioner-io/versioner-api
+      name: Versioner on GitHub
+  analytics:
+    provider: google
+    property: !ENV GOOGLE_ANALYTICS_KEY
+  # version:
+  #   provider: mike
+
+# Copyright
+copyright: Copyright &copy; 2025 Versioner

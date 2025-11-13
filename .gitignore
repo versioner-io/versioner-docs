@@ -1,0 +1,38 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# MkDocs build output
+site/
+
+# Build artifacts
+build/
+dist/
+.cache/
+
+# Temporary files
+*.tmp
+*.bak
+
+# Python virtual environment
+.venv/
+venv/
+*.pyc
+__pycache__/
+
+# Terraform
+terraform/.terraform/
+terraform/.terraform.lock.hcl
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
+terraform/*.tfvars
+!terraform/terraform.tfvars.example
+
+.windsurfrules
