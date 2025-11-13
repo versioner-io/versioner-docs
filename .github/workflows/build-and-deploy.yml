@@ -22,7 +22,6 @@ jobs:
     outputs:
       environment: ${{ steps.env.outputs.environment }}
       bucket: ${{ steps.env.outputs.bucket }}
-      distribution_id: ${{ steps.env.outputs.distribution_id }}
     steps:
       - name: Determine environment
         id: env
@@ -30,11 +29,9 @@ jobs:
           if [ "${{ github.ref }}" == "refs/heads/main" ]; then
             echo "environment=production" >> $GITHUB_OUTPUT
             echo "bucket=versioner-docs-production" >> $GITHUB_OUTPUT
-            echo "distribution_id=${{ secrets.CLOUDFRONT_DISTRIBUTION_ID_PROD }}" >> $GITHUB_OUTPUT
           else
             echo "environment=development" >> $GITHUB_OUTPUT
             echo "bucket=versioner-docs-development" >> $GITHUB_OUTPUT
-            echo "distribution_id=${{ secrets.CLOUDFRONT_DISTRIBUTION_ID_DEV }}" >> $GITHUB_OUTPUT
           fi
 
   build-and-deploy:
@@ -72,11 +69,13 @@ jobs:
             --cache-control "public, max-age=3600"
 
       - name: Invalidate CloudFront cache
+        env:
+          DISTRIBUTION_ID: ${{ github.ref == 'refs/heads/main' && secrets.CLOUDFRONT_DISTRIBUTION_ID_PROD || secrets.CLOUDFRONT_DISTRIBUTION_ID_DEV }}
         run: |
           # Simple retry with delay (CloudFront account-level rate limits)
           for i in 1 2 3 4 5; do
             if aws cloudfront create-invalidation \
-              --distribution-id ${{ needs.determine-environment.outputs.distribution_id }} \
+              --distribution-id $DISTRIBUTION_ID \
               --paths "/*"; then
               echo "✓ Invalidation created successfully"
               exit 0
