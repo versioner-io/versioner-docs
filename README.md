@@ -13,20 +13,20 @@ Visit **[docs.versioner.io](https://docs.versioner.io)** to read the full docume
 - pip
 
 ### Setup
-\`\`\`bash
+```bash
 # Install dependencies
 pip install -r requirements.txt
 
 # Start local server
 mkdocs serve
-\`\`\`
+```
 
 Visit `http://localhost:8000` to preview the docs.
 
 ### Building
-\`\`\`bash
+```bash
 mkdocs build
-\`\`\`
+```
 
 ## 📝 Contributing
 

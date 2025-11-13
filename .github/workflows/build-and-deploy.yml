@@ -30,11 +30,11 @@ jobs:
           if [ "${{ github.ref }}" == "refs/heads/main" ]; then
             echo "environment=production" >> $GITHUB_OUTPUT
             echo "bucket=versioner-docs-production" >> $GITHUB_OUTPUT
-            echo "distribution_id=${{ vars.CLOUDFRONT_DISTRIBUTION_ID_PROD }}" >> $GITHUB_OUTPUT
+            echo "distribution_id=${{ secrets.CLOUDFRONT_DISTRIBUTION_ID_PROD }}" >> $GITHUB_OUTPUT
           else
             echo "environment=development" >> $GITHUB_OUTPUT
             echo "bucket=versioner-docs-development" >> $GITHUB_OUTPUT
-            echo "distribution_id=${{ vars.CLOUDFRONT_DISTRIBUTION_ID_DEV }}" >> $GITHUB_OUTPUT
+            echo "distribution_id=${{ secrets.CLOUDFRONT_DISTRIBUTION_ID_DEV }}" >> $GITHUB_OUTPUT
           fi
 
   build-and-deploy:
@@ -62,7 +62,7 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: us-east-1
 
       - name: Sync to S3
