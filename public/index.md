@@ -17,7 +17,7 @@ flowchart LR
     subgraph versioner["<b>Versioner</b>"]
         direction TB
         api["REST API"]
-        dash["Dashboard"]
+        web["Web UI"]
     end
 
     subgraph outputs["<b>Visibility & Control</b>"]
@@ -32,10 +32,10 @@ flowchart LR
     tf --> api
     custom --> api
 
-    api --> dash
-    dash --> view
-    dash --> audit
-    dash --> notify
+    api --> web
+    api --> notify
+    web --> view
+    web --> audit
 
     style versioner fill:#2E3D8A,stroke:#333,stroke-width:3px,color:#fff
     style sources fill:#393B43,stroke:#999,stroke-width:2px,color:#1a237e
@@ -45,7 +45,7 @@ flowchart LR
     style tf fill:#5865f2,stroke:#1a237e,stroke-width:2px,color:#1a237e
     style custom fill:#5865f2,stroke:#1a237e,stroke-width:2px,color:#1a237e
     style api fill:#5865f2,stroke:#333,stroke-width:2px,color:#fff
-    style dash fill:#5865f2,stroke:#333,stroke-width:2px,color:#fff
+    style web fill:#5865f2,stroke:#333,stroke-width:2px,color:#fff
     style view fill:#5865f2,stroke:#1a237e,stroke-width:2px,color:#1a237e
     style audit fill:#5865f2,stroke:#1a237e,stroke-width:2px,color:#1a237e
     style notify fill:#5865f2,stroke:#1a237e,stroke-width:2px,color:#1a237e
