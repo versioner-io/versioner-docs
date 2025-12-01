@@ -1,0 +1,81 @@
+name: Build and Tag
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  id-token: write
+  contents: write
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Build MkDocs site
+        run: |
+          mkdocs build --strict
+
+  tag:
+    name: Tag Release
+    runs-on: ubuntu-latest
+    needs: build
+    permissions:
+      id-token: write
+      contents: write
+    outputs:
+      build_number: ${{ steps.buildnumber.outputs.build_number }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Generate build number
+        id: buildnumber
+        uses: onyxmueller/build-tag-number@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          prefix: ""
+
+      - name: Create Git tag
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.rest.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: `refs/tags/${process.env.BUILD_NUMBER}`,
+              sha: context.sha
+            })
+        env:
+          BUILD_NUMBER: ${{ steps.buildnumber.outputs.build_number }}
+
+  track-build:
+    name: Track Build in Versioner
+    runs-on: ubuntu-latest
+    needs: tag
+    steps:
+      - name: Track build
+        uses: versioner-io/versioner-github-action@main
+        with:
+          api_key: ${{ secrets.VERSIONER_API_KEY }}
+          product_name: versioner-docs
+          version: ${{ needs.tag.outputs.build_number }}
+          event_type: build
+          status: success

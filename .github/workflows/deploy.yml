@@ -1,0 +1,121 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to deploy (e.g., 42, 123)'
+        required: true
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        type: choice
+        options:
+          - development
+          - production
+
+jobs:
+  deploy:
+    name: Deploy version ${{ inputs.version }} to ${{ inputs.environment }}
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    env:
+      S3_BUCKET: ${{ inputs.environment == 'production' && 'versioner-docs-production' || 'versioner-docs-development' }}
+      CLOUDFRONT_DISTRIBUTION_ID: ${{ inputs.environment == 'production' && secrets.CLOUDFRONT_DISTRIBUTION_ID_PROD || secrets.CLOUDFRONT_DISTRIBUTION_ID_DEV }}
+    steps:
+      - name: Checkout code at tag
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.version }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Track deployment start in Versioner
+        id: track_start
+        uses: versioner-io/versioner-github-action@main
+        with:
+          api_key: ${{ secrets.VERSIONER_API_KEY }}
+          product_name: versioner-docs
+          version: ${{ inputs.version }}
+          environment: ${{ inputs.environment }}
+          event_type: deployment
+          status: started
+          metadata: |
+            {
+              "triggered_by": "${{ github.actor }}",
+              "workflow_run_id": "${{ github.run_id }}"
+            }
+
+      - name: Build MkDocs site
+        id: build
+        run: |
+          mkdocs build --strict
+        continue-on-error: true
+
+      - name: Configure AWS credentials
+        if: steps.build.outcome == 'success'
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: us-east-1
+
+      - name: Sync to S3
+        id: sync
+        if: steps.build.outcome == 'success'
+        run: |
+          aws s3 sync site/ s3://${{ env.S3_BUCKET }}/ \
+            --delete \
+            --cache-control "public, max-age=3600"
+        continue-on-error: true
+
+      - name: Invalidate CloudFront cache
+        id: invalidate
+        if: steps.sync.outcome == 'success'
+        env:
+          DISTRIBUTION_ID: ${{ inputs.environment == 'production' && secrets.CLOUDFRONT_DISTRIBUTION_ID_PROD || secrets.CLOUDFRONT_DISTRIBUTION_ID_DEV }}
+        run: |
+          for i in 1 2 3 4 5; do
+            if aws cloudfront create-invalidation \
+              --distribution-id $DISTRIBUTION_ID \
+              --paths "/*"; then
+              echo "✓ Invalidation created successfully"
+              exit 0
+            fi
+            if [ $i -lt 5 ]; then
+              echo "⚠ Attempt $i failed, waiting 5s..."
+              sleep 5
+            fi
+          done
+          echo "✗ Failed after 5 attempts"
+          exit 1
+        continue-on-error: true
+
+      - name: Track deployment completion in Versioner
+        if: always() && steps.track_start.outcome == 'success'
+        uses: versioner-io/versioner-github-action@main
+        with:
+          api_key: ${{ secrets.VERSIONER_API_KEY }}
+          product_name: versioner-docs
+          version: ${{ inputs.version }}
+          environment: ${{ inputs.environment }}
+          event_type: deployment
+          status: ${{ job.status == 'cancelled' && 'aborted' || (steps.build.outcome == 'success' && steps.sync.outcome == 'success' && steps.invalidate.outcome == 'success' && 'completed' || 'failed') }}
+          metadata: |
+            {
+              "triggered_by": "${{ github.actor }}",
+              "workflow_run_id": "${{ github.run_id }}",
+              "build_outcome": "${{ steps.build.outcome }}",
+              "sync_outcome": "${{ steps.sync.outcome }}",
+              "invalidate_outcome": "${{ steps.invalidate.outcome }}",
+              "job_status": "${{ job.status }}"
+            }
