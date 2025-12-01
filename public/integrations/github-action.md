@@ -88,7 +88,7 @@ jobs:
           api-key: ${{ secrets.VERSIONER_API_KEY }}
           product: my-service
           version: ${{ github.sha }}
-          event-type: version
+          event-type: build
           status: started
 
       - name: Build
@@ -101,7 +101,7 @@ jobs:
           api-key: ${{ secrets.VERSIONER_API_KEY }}
           product: my-service
           version: ${{ github.sha }}
-          event-type: version
+          event-type: build
           status: completed
 
   deploy:
