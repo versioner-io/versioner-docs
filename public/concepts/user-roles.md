@@ -372,5 +372,5 @@ All role changes are logged:
 ## Next Steps
 
 - Learn about [API Authentication](../api/authentication.md)
-- Explore [Team Management](../guides/team-management.md) (coming soon)
 - See the [Interactive API Docs](../api/interactive-docs.md)
+- Explore [Deployment Rules](deployment-buttons.md) for approval workflows
