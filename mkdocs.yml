@@ -74,6 +74,7 @@ nav:
       - Releases: concepts/releases.md
       - Environments: concepts/environments.md
       - Notifications: concepts/notifications.md
+      - User Roles: concepts/user-roles.md
 
 # Markdown extensions
 markdown_extensions:

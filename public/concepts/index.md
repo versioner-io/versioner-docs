@@ -13,6 +13,7 @@ Concepts are the fundamental building blocks of Versioner. They represent the en
 - **How you stay informed** - Notifications
 - **How you trigger deployments** - Deployment Buttons
 - **How you configure** - Variables
+- **Who can do what** - User Roles
 
 ## The Versioner Model
 
@@ -36,6 +37,9 @@ Variables (configuration values)
 
 Deployment Buttons (quick deployment access)
   └─ Use Variables to create dynamic URLs
+
+User Roles (access control)
+  └─ Define what users can view and modify
 ```
 
 ## Start Here: The Basics
@@ -122,6 +126,16 @@ Deployment Buttons (quick deployment access)
 
 [Learn about Deployment Buttons →](deployment-buttons.md)
 
+### 9. User Roles
+
+**What:** Access control that defines what users can view and modify
+
+**Why it matters:** User roles ensure team members have appropriate permissions for their responsibilities.
+
+**Example:** Developers can deploy, viewers can only observe, admins can manage team settings
+
+[Learn about User Roles →](user-roles.md)
+
 ## Common Workflows
 
 ### Tracking a Simple Deployment
@@ -200,6 +214,7 @@ If you're new to Versioner, we recommend reading the concepts in this order:
 6. **[Notifications](notifications.md)** - Stay informed about events
 7. **[Variables](variables.md)** - Configure reusable values
 8. **[Deployment Buttons](deployment-buttons.md)** - Streamline deployment workflows
+9. **[User Roles](user-roles.md)** - Manage team access and permissions
 
 ## Key Principles
 
@@ -245,6 +260,7 @@ Ready to dive deeper? Choose a concept to explore:
 - [Notifications](notifications.md) - Real-time alerts
 - [Variables](variables.md) - Reusable configuration values
 - [Deployment Buttons](deployment-buttons.md) - One-click deployment shortcuts
+- [User Roles](user-roles.md) - Team access and permissions
 
 Or jump to integration guides:
 
