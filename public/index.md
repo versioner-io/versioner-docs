@@ -37,18 +37,18 @@ flowchart LR
     web --> view
     web --> audit
 
-    style versioner fill:#2E3D8A,stroke:#333,stroke-width:3px,color:#fff
-    style sources fill:#393B43,stroke:#999,stroke-width:2px,color:#1a237e
-    style outputs fill:#393B43,stroke:#999,stroke-width:2px,color:#1a237e
-    style gh fill:#5865f2,stroke:#1a237e,stroke-width:2px,color:#1a237e
-    style jk fill:#5865f2,stroke:#1a237e,stroke-width:2px,color:#1a237e
-    style tf fill:#5865f2,stroke:#1a237e,stroke-width:2px,color:#1a237e
-    style custom fill:#5865f2,stroke:#1a237e,stroke-width:2px,color:#1a237e
-    style api fill:#5865f2,stroke:#333,stroke-width:2px,color:#fff
-    style web fill:#5865f2,stroke:#333,stroke-width:2px,color:#fff
-    style view fill:#5865f2,stroke:#1a237e,stroke-width:2px,color:#1a237e
-    style audit fill:#5865f2,stroke:#1a237e,stroke-width:2px,color:#1a237e
-    style notify fill:#5865f2,stroke:#1a237e,stroke-width:2px,color:#1a237e
+    style versioner fill:#0f4c47,stroke:#14b8a6,stroke-width:3px,color:#fff
+    style sources fill:#2d3748,stroke:#4a5568,stroke-width:2px,color:#fff
+    style outputs fill:#2d3748,stroke:#4a5568,stroke-width:2px,color:#fff
+    style gh fill:#115e59,stroke:#0d9488,stroke-width:2px,color:#fff
+    style jk fill:#115e59,stroke:#0d9488,stroke-width:2px,color:#fff
+    style tf fill:#115e59,stroke:#0d9488,stroke-width:2px,color:#fff
+    style custom fill:#115e59,stroke:#0d9488,stroke-width:2px,color:#fff
+    style api fill:#0d9488,stroke:#14b8a6,stroke-width:2px,color:#fff
+    style web fill:#0d9488,stroke:#14b8a6,stroke-width:2px,color:#fff
+    style view fill:#115e59,stroke:#0d9488,stroke-width:2px,color:#fff
+    style audit fill:#115e59,stroke:#0d9488,stroke-width:2px,color:#fff
+    style notify fill:#115e59,stroke:#0d9488,stroke-width:2px,color:#fff
 ```
 
 ## 🚀 Quick Start

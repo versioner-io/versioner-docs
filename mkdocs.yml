@@ -15,20 +15,10 @@ theme:
   logo: assets/versioner-logo.png
   favicon: assets/versioner-logo.png
   palette:
-    # Dark mode (default)
-    - scheme: slate
-      primary: indigo
-      accent: indigo
-      toggle:
-        icon: material/brightness-7
-        name: Switch to light mode
-    # Light mode
-    - scheme: default
-      primary: indigo
-      accent: indigo
-      toggle:
-        icon: material/brightness-4
-        name: Switch to dark mode
+    # Dark mode only
+    scheme: slate
+    primary: teal
+    accent: teal
   font:
     text: Roboto
     code: Roboto Mono
@@ -45,6 +35,10 @@ theme:
     - content.code.annotate
   icon:
     repo: fontawesome/brands/github
+
+# Extra CSS
+extra_css:
+  - stylesheets/extra.css
 
 # Navigation structure
 nav:
