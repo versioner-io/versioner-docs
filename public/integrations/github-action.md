@@ -33,10 +33,14 @@ Add the Versioner action to your workflow:
 | Input | Description | Default |
 |-------|-------------|---------|
 | `status` | Deployment status | `success` |
+| `event-type` | Event type: `build` or `deployment` | `deployment` |
+| `fail-on-api-error` | Fail workflow if Versioner API has connectivity/auth errors | `true` |
 | `deployed-by` | User who triggered deployment | `${{ github.actor }}` |
 | `scm-branch` | Git branch | `${{ github.ref_name }}` |
 | `scm-sha` | Git commit SHA | `${{ github.sha }}` |
 | `build-url` | Link to workflow run | Auto-generated |
+
+**Note:** Preflight check rejections (409, 423, 428) always fail the workflow. Policy enforcement is controlled server-side via rule status in the Versioner UI.
 
 ## Examples
 
@@ -137,6 +141,24 @@ jobs:
     status: ${{ steps.deploy.outcome }}
 ```
 
+### Best-Effort Observability
+
+Allow deployments to proceed even if Versioner API is unavailable:
+
+```yaml
+- uses: versioner-io/versioner-github-action@v1
+  with:
+    api-key: ${{ secrets.VERSIONER_API_KEY }}
+    product: my-service
+    version: ${{ github.sha }}
+    environment: production
+    fail-on-api-error: false  # Don't block deployment if Versioner is down
+```
+
+This is useful when you treat Versioner as an observability tool rather than a critical deployment gate. The action will log warnings but allow the workflow to continue.
+
+**Important:** Preflight check rejections (e.g., no-deploy windows, flow violations) will still fail the workflow. To manage these, use the rule status controls in the Versioner UI (enabled, report-only, disabled).
+
 ## Best Practices
 
 ### 1. Store API Key as Secret
@@ -202,6 +224,25 @@ Track deployments to all environments, not just production:
 - Ensure `product`, `version`, and `environment` are provided
 - Check field values are valid strings
 - Review the [Event Tracking API](../api/event-tracking.md) for validation rules
+
+### Action Fails with "Deployment Blocked by Schedule" (423)
+
+**Problem:** Deployment is blocked by a no-deploy window rule.
+
+**Solution:**
+- Wait until the no-deploy window ends (check the error message for retry time)
+- For emergencies, an admin can temporarily set the rule to "Report Only" in the Versioner UI
+- After the emergency, flip the rule back to "Enabled"
+
+### Action Fails with "Deployment Precondition Failed" (428)
+
+**Problem:** Deployment doesn't meet prerequisites (e.g., flow violations, insufficient soak time, missing approvals).
+
+**Solution:**
+- **Flow violation**: Deploy to required environments first (e.g., staging before production)
+- **Insufficient soak time**: Wait for the required soak period to complete
+- **Missing approval**: Obtain required approval via Versioner UI
+- For emergencies, an admin can temporarily set the rule to "Report Only"
 
 ## Next Steps
 

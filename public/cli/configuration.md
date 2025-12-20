@@ -10,6 +10,7 @@ Configure the CLI using environment variables.
 |----------|-------------|---------|
 | `VERSIONER_API_KEY` | API key for authentication | - |
 | `VERSIONER_API_URL` | API base URL | `https://api.versioner.io` |
+| `VERSIONER_FAIL_ON_API_ERROR` | Fail command if API errors occur | `true` |
 
 ### Set Environment Variables
 
@@ -18,6 +19,7 @@ Configure the CLI using environment variables.
 ```bash
 export VERSIONER_API_KEY="sk_mycompany_k1_..."
 export VERSIONER_API_URL="https://api.versioner.io"
+export VERSIONER_FAIL_ON_API_ERROR=true
 ```
 
 **Permanent (add to shell profile):**
@@ -66,6 +68,58 @@ versioner track build \
 ```
 
 See [CI/CD Integration](ci-cd-systems.md) for details on what's auto-detected in each system.
+
+## API Error Handling
+
+Control how the CLI handles API connectivity and authentication errors.
+
+### `--fail-on-api-error` Flag
+
+**Default:** `true` (API errors fail the command)
+
+**Purpose:** Controls whether API connectivity/authentication errors should block deployments.
+
+**Use Cases:**
+
+**Mission-Critical Audit Trail (Default):**
+```bash
+# Every deployment MUST be recorded
+versioner track deployment \
+  --product my-api \
+  --environment production \
+  --version 1.2.3 \
+  --status completed \
+  --fail-on-api-error=true  # Default behavior
+```
+
+**Best-Effort Observability:**
+```bash
+# Recording is nice-to-have, don't block production deployments
+versioner track deployment \
+  --product my-api \
+  --environment production \
+  --version 1.2.3 \
+  --status completed \
+  --fail-on-api-error=false
+```
+
+**Environment Variable:**
+```bash
+export VERSIONER_FAIL_ON_API_ERROR=false
+versioner track deployment ...
+```
+
+**Affected Error Types:**
+- 401 (Authentication failed)
+- 403 (Authorization failed)
+- 404 (Endpoint not found)
+- 422 (Validation error)
+- Connection refused
+- Request timeout
+- Other HTTP errors
+
+!!! note "Preflight Checks"
+    Preflight check rejections (409, 423, 428) always fail regardless of this flag. Policy enforcement is controlled server-side via rule status settings in the Versioner UI.
 
 ## Custom API Endpoint
 
@@ -142,9 +196,8 @@ The CLI uses standard exit codes to indicate success or failure.
 |------|-------------|------------------|
 | `0` | Success | Deployment tracked successfully |
 | `1` | General error | Network error, unexpected failure |
-| `2` | Authentication error | Invalid or missing API key |
-| `3` | Validation error | Missing required field (e.g., `--product`) |
-| `4` | API error | Server returned 4xx or 5xx error |
+| `4` | API error | Authentication, validation, server errors |
+| `5` | Preflight check failure | Deployment blocked by policy rules |
 
 ### Using Exit Codes in Scripts
 

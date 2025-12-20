@@ -10,6 +10,7 @@ These options work with all commands:
 |--------|-------------|---------|
 | `--api-key` | Versioner API key | `$VERSIONER_API_KEY` |
 | `--api-url` | API base URL | `https://api.versioner.io` |
+| `--fail-on-api-error` | Fail command if API is unreachable or returns auth/validation errors | `true` |
 | `--verbose` | Verbose output | `false` |
 | `--debug` | Debug output (includes HTTP requests/responses) | `false` |
 | `--help` | Show help | - |
@@ -39,6 +40,7 @@ versioner track build [OPTIONS]
 | `--build-number` | No | Build number from CI system |
 | `--build-url` | No | Link to build in CI system |
 | `--invoke-id` | No | Unique invocation ID |
+| `--fail-on-api-error` | No | Fail command if API errors occur (default: `true`) |
 
 \* Auto-detected in CI/CD systems. See [CI/CD Integration](ci-cd-systems.md).
 
@@ -131,13 +133,14 @@ versioner track deployment [OPTIONS]
 | `--build-number` | No | Build number from CI system |
 | `--build-url` | No | Link to build in CI system |
 | `--invoke-id` | No | Unique invocation ID |
+| `--fail-on-api-error` | No | Fail command if API errors occur (default: `true`) |
 
 \* Auto-detected in CI/CD systems. See [CI/CD Integration](ci-cd-systems.md).
 
 ### Status Values
 
 - `pending` - Deployment is pending/queued
-- `started` - Deployment has started
+- `started` - Deployment has started (triggers preflight checks)
 - `completed` - Deployment completed successfully
 - `failed` - Deployment failed
 - `aborted` - Deployment was aborted/cancelled
@@ -297,10 +300,9 @@ See [CI/CD Integration](ci-cd-systems.md) for details on what's auto-detected in
 | Code | Description |
 |------|-------------|
 | `0` | Success |
-| `1` | General error |
-| `2` | Authentication error (invalid API key) |
-| `3` | Validation error (missing required fields) |
-| `4` | API error (server returned error) |
+| `1` | General error (network issues, invalid arguments) |
+| `4` | API error (authentication, validation) |
+| `5` | Preflight check failure (deployment blocked) |
 
 ### Example: Check Exit Code
 
