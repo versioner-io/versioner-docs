@@ -97,6 +97,5 @@ versioner track deployment \
 
 ## Next Steps
 
-- [Command Reference](commands.md) - Learn all available commands
-- [CI/CD Integration](ci-cd-systems.md) - Auto-detect metadata in CI/CD systems
-- [Configuration](configuration.md) - Advanced configuration options
+- [CLI Usage](usage.md) - Learn all available commands and configuration
+- [CI/CD Integration](ci-cd/index.md) - Auto-detect metadata in CI/CD systems
