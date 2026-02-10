@@ -36,3 +36,6 @@ terraform/*.tfvars
 !terraform/terraform.tfvars.example
 
 .windsurfrules
+
+# Claude Code
+.claude/
