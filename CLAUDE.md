@@ -9,8 +9,8 @@ Versioner public documentation site, built with MkDocs Material and deployed to 
 ## Cross-Repo Context
 
 This repo is part of the Versioner ecosystem. Before starting work:
-- Read `/Users/phil.austin/projects/versioner-repos/versioner-dev-docs/status.md` for current status
-- Update `status.md` as you complete tasks
+- Use the `/kanban-markdown` skill or read `versioner-dev-docs/.devtool/features/` for current status and priorities
+- Update feature file status in `versioner-dev-docs/.devtool/features/` as you complete tasks, add entries to `changelog.md`
 
 ## Commands
 
