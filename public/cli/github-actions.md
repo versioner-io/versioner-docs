@@ -1,7 +1,7 @@
 # GitHub Actions
 
 !!! info "Native integration available"
-    For a more streamlined experience, use the [Versioner GitHub Action](../../integrations/github-action.md) instead of the CLI.
+    For a more streamlined experience, use the [Versioner GitHub Action](../integrations/github-action.md) instead of the CLI.
 
 ## Auto-Detected Metadata
 
@@ -97,5 +97,5 @@ jobs:
 
 ## Next Steps
 
-- [CLI Usage Guide](../usage.md)
+- [CLI Usage Guide](usage.md)
 - [CI/CD Integration Overview](index.md)

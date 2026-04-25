@@ -15,3 +15,18 @@
 [data-md-color-scheme="slate"] .md-content {
   background-color: #1a1a1a;
 }
+
+/* Teal header row + vertical borders on all tables */
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) {
+  border-collapse: collapse;
+}
+
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) th {
+  background-color: #0a3a36;
+  color: #ffffff;
+}
+
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) th,
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) td {
+  border: 1px solid rgba(20, 184, 166, 0.2);
+}

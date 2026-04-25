@@ -1,18 +1,21 @@
 # Notifications
 
-Get real-time alerts about deployments and builds via Slack.
+Stay informed about your deployments through two distinct notification systems: **Slack webhooks** for event-based alerts and **email notifications** for Deployment Request approvals.
 
 ## Overview
 
-Versioner can send notifications to Slack channels when events occur:
+Versioner provides two notification systems:
 
-- Deployment started, completed, or failed
-- Build started, completed, or failed
-- Deployment rejected by pre-flight checks
+1. **Slack Webhooks** — Event-based alerting to Slack channels about deployment and build events
+2. **DR Approval Emails** — Action-oriented emails when a Deployment Request requires your approval
 
-## Notification Channels
+## Part 1: Slack Webhooks
 
-A **notification channel** represents a destination for notifications (currently Slack webhooks).
+Event-based notifications to Slack channels. Configure different events to go to different channels.
+
+### Notification Channels
+
+A **notification channel** represents a destination for notifications (Slack webhooks).
 
 ### Creating a Channel
 
@@ -297,13 +300,84 @@ versioner deploy \
 
 **Solution:** Verify webhook URL points to correct channel.
 
-## Future Enhancements
+## Part 2: DR Approval Emails
 
-!!! info "Coming Soon"
-    - Email notifications
-    - Microsoft Teams integration
-    - Custom webhooks
-    - Notification templates
+When a Deployment Request is created and moves to **In Progress**, users whose role matches an approval slot receive an **action-oriented approval email**.
+
+!!! info "Protect tier"
+    DR Approval Emails are part of Deployment Requests, available on Protect tier and above.
+
+### How It Works
+
+1. **DR Created and Submitted** — A Deployment Request is created with approval slots by role (e.g., "product", "security")
+2. **Approvers Notified** — Users whose role matches an approval slot receive an email
+3. **Email Contains:**
+   - Summary of what needs approval (product, version, environment)
+   - Link directly to the DR in Versioner
+   - Clear call-to-action: "Approve" or "Reject"
+4. **User Reviews and Acts** — User clicks link, reviews in Versioner UI, approves or rejects
+5. **Creator Notified** — When the user approves or rejects, the DR creator receives an email with the outcome
+
+### Example Email Flow
+
+**Scenario:** Create a DR for payment-api v2.0.0 to production, requiring product + security approval.
+
+**Step 1: DR Created**
+```
+Product: payment-api
+Version: 2.0.0
+Environment: production
+Required Approvals: product, security
+```
+
+**Step 2: Approvers Get Emails**
+
+Product team receives:
+```
+Subject: Approval Requested: payment-api v2.0.0 → production
+Body:
+  Product team approval required for payment-api v2.0.0
+  deployment to production.
+  
+  [View & Approve] button → links to DR
+```
+
+Security team receives similar email.
+
+**Step 3: Approval Actions**
+
+Product reviewer clicks "View & Approve", reviews in Versioner, approves.
+→ Approval slot marked complete
+→ DR creator gets email: "payment-api DR: Product approval granted by jane@company.com"
+
+Security reviewer is still reviewing...
+→ DR remains in "In Progress"
+
+**Step 4: All Approvals Complete**
+
+Security reviewer approves.
+→ All approval slots complete
+→ DR transitions to "Approved"
+→ DR creator gets final email: "payment-api DR: Ready to deploy"
+
+### Email Customization
+
+DR approval emails are **not individually configurable** (they're part of the DR lifecycle), but you can:
+
+- **Set optional approvals** — Some approval slots can be marked optional
+- **Create DR templates** — Pre-configure approval slots for common workflows
+- **Use role permissions** — Control who has approval permissions via user roles
+
+See [Deployment Requests](deployment-requests.md) and [User Roles](user-roles.md) for details.
+
+### No Email Fatigue
+
+Unlike Slack webhooks (which can be noisy), DR approval emails are **selective**:
+
+- Only sent when your role matches an approval slot
+- One email per DR requiring your approval
+- Clear action required (approve/reject)
+- No configuration needed—automatically integrated with DRs
 
 ## Related Concepts
 

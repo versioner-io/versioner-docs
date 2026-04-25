@@ -98,4 +98,4 @@ versioner track deployment \
 ## Next Steps
 
 - [CLI Usage](usage.md) - Learn all available commands and configuration
-- [CI/CD Integration](ci-cd/index.md) - Auto-detect metadata in CI/CD systems
+- [CI/CD Integration](index.md) - Auto-detect metadata in CI/CD systems

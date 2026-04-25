@@ -1,6 +1,9 @@
 # User Roles
 
-A **user role** defines what actions a user can perform within your Versioner account. Roles control access to features and data, including the ability to approve releases and versions.
+A **user role** defines what actions a user can perform within your Versioner account. Roles control access to features and data, including the ability to approve Deployment Requests.
+
+!!! note "Tier Availability"
+    Admin and Viewer roles are available on Free tier. All roles are available on Protect tier and above.
 
 ## Overview
 
@@ -9,14 +12,30 @@ Versioner uses role-based access control (RBAC) to manage permissions. Each user
 Roles are designed around common personas in software delivery:
 
 - **Administrators** - Full control over account settings and users
-- **Release Managers** - Manage releases and deployment workflows
-- **Product Managers** - Create releases and approve product readiness
-- **Developers** - Create versions and releases
+- **Release Managers** - Manage deployment workflows and governance
+- **Product Managers** - Approve product readiness and release decisions
+- **Developers** - Create and deploy versions
 - **DevOps/SRE** - Manage infrastructure and deployment automation
 - **QA Engineers** - Approve quality standards
 - **Security Team** - Approve security reviews
 - **Compliance Team** - Approve regulatory compliance
+- **Billing Managers** - Manage billing and subscriptions
 - **Viewers** - Read-only access for stakeholders
+
+## Approval Type Mapping
+
+When using Deployment Requests, each approval slot is assigned an **approval type**. This table shows which roles can approve each type:
+
+| Approval Type | Approved By Roles |
+|---------------|-------------------|
+| UAT | product, admin, release_manager |
+| QA | qa, sre, admin, release_manager |
+| Performance | sre, qa, admin, release_manager |
+| Security | security, admin, release_manager |
+| Code Review | developer, admin, release_manager |
+| Compliance | compliance, admin, release_manager |
+
+**Note:** Admin and Release Manager roles can approve any approval type.
 
 ## Available Roles
 
@@ -198,8 +217,8 @@ The following table shows key capabilities for each role:
 | Manage user roles | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | Manage billing | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ |
 
-!!! note "Version Approvals"
-    Multiple roles can approve versions, but each approval is typed (e.g., "qa", "security", "compliance"). Deployment rules can require specific approval types before allowing deployment to production environments.
+!!! note "Deployment Request Approvals"
+    In Deployment Requests, each approval slot is assigned a type (e.g., "qa", "security", "product"). Multiple users with the same role can exist, but only one approval per type is needed to complete that approval slot. See [Deployment Requests](deployment-requests.md) for details.
 
 ## Managing User Roles
 
@@ -367,10 +386,11 @@ All role changes are logged:
 
 - **[Products](products.md)** - What users can deploy
 - **[Environments](environments.md)** - Where users can deploy
-- **[Notifications](notifications.md)** - Role-based notification settings
+- **[Deployment Requests](deployment-requests.md)** - Approval workflows that use roles
+- **[Notifications](notifications.md)** - Email notifications for approvals
 
 ## Next Steps
 
-- Learn about [API Authentication](../api/authentication.md)
-- See the [Interactive API Docs](../api/interactive-docs.md)
-- Explore [Deployment Rules](deployment-buttons.md) for approval workflows
+- Learn about [Deployment Requests](deployment-requests.md) for approval workflows
+- See [API Authentication](../api/authentication.md) for managing API keys
+- Explore the [Interactive API Docs](../api/interactive-docs.md)

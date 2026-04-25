@@ -1,16 +1,17 @@
 # Variables
 
-Variables are reusable configuration values that can be referenced throughout Versioner to create dynamic templates and integrations.
+Variables are reusable configuration values used with Deployment Buttons and other Versioner features.
 
 ## Overview
 
-Variables allow you to define values once and reuse them across multiple features. They're particularly useful for:
+Variables allow you to define values once and reuse them across templates. They're primarily used for:
 
-- Creating deployment button URLs with dynamic parameters
-- Configuring integrations with external tools
-- Avoiding repetition of common values (URLs, tokens, identifiers)
+- **Deployment Buttons** — Create dynamic URLs with version and environment pre-filled
+- **Template configuration** — Avoid repeating common values (URLs, IDs, tool names)
 
-Variables are designed to be **generic and reusable** - while they're currently used for deployment buttons, they can power future features like email templates, webhooks, and custom integrations.
+See [Deployment Buttons](deployment-buttons.md) to learn how Variables power dynamic deployment shortcuts.
+
+Variables are designed to be flexible and reusable—supporting future features like custom webhooks and integrations.
 
 ## Variable Scopes
 
@@ -291,15 +292,19 @@ For non-obvious values, consider adding context in your internal documentation:
 
 ## Use Cases
 
-Variables are currently used by:
+### Current
 
-- **[Deployment Buttons](deployment-buttons.md)** - Create dynamic URLs to deployment tools
+Variables are used by:
 
-Future features that will use variables:
+- **[Deployment Buttons](deployment-buttons.md)** - Create dynamic URLs to your deployment tools with version and environment pre-filled
+
+### Future
+
+Planned features that will use variables:
 
 - **Email Templates** - Personalize notification emails
-- **Webhooks** - Configure custom webhook URLs and payloads
-- **Custom Integrations** - Connect to third-party tools
+- **Custom Webhooks** - Configure webhook URLs and payloads
+- **Third-Party Integrations** - Connect to additional tools
 
 ## Related Concepts
 

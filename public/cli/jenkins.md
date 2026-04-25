@@ -106,5 +106,5 @@ pipeline {
 
 ## Next Steps
 
-- [CLI Usage Guide](../usage.md)
+- [CLI Usage Guide](usage.md)
 - [CI/CD Integration Overview](index.md)

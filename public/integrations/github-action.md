@@ -40,7 +40,7 @@ Add the Versioner action to your workflow:
 | `scm-sha` | Git commit SHA | `${{ github.sha }}` |
 | `build-url` | Link to workflow run | Auto-generated |
 
-**Note:** Preflight check rejections (409, 423, 428) always fail the workflow. Policy enforcement is controlled server-side via rule status in the Versioner UI.
+**Note:** Deployment Rule violations always fail the workflow (exit codes 5, 423, 428). See [Deployment Rules](../concepts/deployment-rules.md) to understand and configure rules. Use report-only mode to test policies before enforcing.
 
 ## Examples
 
@@ -155,9 +155,7 @@ Allow deployments to proceed even if Versioner API is unavailable:
     fail-on-api-error: false  # Don't block deployment if Versioner is down
 ```
 
-This is useful when you treat Versioner as an observability tool rather than a critical deployment gate. The action will log warnings but allow the workflow to continue.
-
-**Important:** Preflight check rejections (e.g., no-deploy windows, flow violations) will still fail the workflow. To manage these, use the rule status controls in the Versioner UI (enabled, report-only, disabled).
+**Important:** Deployment Rule violations will still fail the workflow. To test policies before enforcing, use report-only mode in the rule settings. See [Deployment Rules](../concepts/deployment-rules.md) for details.
 
 ## Best Practices
 
@@ -189,11 +187,6 @@ For releases, use semantic versions instead of commit SHAs:
 Track deployments to all environments, not just production:
 
 ```yaml
-# Development
-- uses: versioner-io/versioner-github-action@v1
-  with:
-    environment: dev
-
 # Staging
 - uses: versioner-io/versioner-github-action@v1
   with:
@@ -205,47 +198,15 @@ Track deployments to all environments, not just production:
     environment: production
 ```
 
+or better yet...
+
+```yaml
+# Parameterized
+- uses: versioner-io/versioner-github-action@v1
+  with:
+    environment: ${{ inputs.environment }}
+```
+
 ## Troubleshooting
 
-### Action Fails with "401 Unauthorized"
-
-**Problem:** API key is invalid or not set.
-
-**Solution:**
-- Verify `VERSIONER_API_KEY` is set in GitHub Secrets
-- Check the secret name matches your workflow
-- Ensure the API key is valid
-
-### Action Fails with "422 Validation Error"
-
-**Problem:** Required fields are missing or invalid.
-
-**Solution:**
-- Ensure `product`, `version`, and `environment` are provided
-- Check field values are valid strings
-- Review the [Event Tracking API](../api/event-tracking.md) for validation rules
-
-### Action Fails with "Deployment Blocked by Schedule" (423)
-
-**Problem:** Deployment is blocked by a no-deploy window rule.
-
-**Solution:**
-- Wait until the no-deploy window ends (check the error message for retry time)
-- For emergencies, an admin can temporarily set the rule to "Report Only" in the Versioner UI
-- After the emergency, flip the rule back to "Enabled"
-
-### Action Fails with "Deployment Precondition Failed" (428)
-
-**Problem:** Deployment doesn't meet prerequisites (e.g., flow violations, insufficient soak time, missing approvals).
-
-**Solution:**
-- **Flow violation**: Deploy to required environments first (e.g., staging before production)
-- **Insufficient soak time**: Wait for the required soak period to complete
-- **Missing approval**: Obtain required approval via Versioner UI
-- For emergencies, an admin can temporarily set the rule to "Report Only"
-
-## Next Steps
-
-- Learn about [Event Types](../api/event-types.md)
-- Set up [Notifications](../concepts/notifications.md)
-- Explore the [Event Tracking API](../api/event-tracking.md)
+See the [Troubleshooting guide](troubleshooting.md) for help with common API errors including 401, 422, 423, and 428 responses.

@@ -1,12 +1,14 @@
 # Deployment Buttons
 
-Trigger deployments directly from Versioner's UI or Slack notifications with one-click deployment buttons.
+Trigger governed deployments directly from Versioner's UI or Slack notifications with one-click shortcuts to your deployment tools.
 
 ## Overview
 
 Deployment buttons provide quick access to your deployment tools by generating pre-configured URLs that link to your existing deployment infrastructure (Rundeck, Jenkins, custom tools, etc.).
 
-**Key principle:** Deployment buttons **construct and open URLs** in your browser. They don't execute deployments directly—they provide a convenient shortcut to your deployment tools with the correct parameters already filled in.
+**Key principle:** Deployment buttons are shortcuts to your deployment tools. They construct URLs and open them in your browser, with version and environment information pre-filled where supported.
+
+**Important:** Versioner requires no access to your CI/CD system. Buttons simply navigate to your tools—your deployment system retains full control.
 
 ## Why Use Deployment Buttons?
 
@@ -42,6 +44,16 @@ Navigate directly to a Rundeck job with the version pre-filled:
 ```
 https://rundeck.mycompany.com/project/DevDeployments/job/show/de5587ec?opt.git_ref=1.2.3
 ```
+
+### GitHub Actions Deployments
+
+Open a GitHub Actions workflow to trigger manually:
+
+```
+https://github.com/myorg/my-service/actions/workflows/deploy.yml
+```
+
+**Note:** GitHub Actions doesn't support pre-filling version/environment in the URL. The button opens the workflow trigger page, and you click "Run Workflow" to fill in parameters manually. This ensures safety—versions can't be accidentally mis-specified by URL manipulation.
 
 ### Jenkins Deployments
 
@@ -234,10 +246,12 @@ Clicking the button opens your deployment tool with the correct parameters.
 
 ### Rundeck
 
-**Basic deployment:**
+**Basic deployment with version pre-filled:**
 ```
 {rundeck_base_url}/project/{rundeck_project}/job/show/{rundeck_job_id}?opt.version={vi_version}
 ```
+
+This pre-populates the version field—Rundeck receives the version from the URL and the user can click "Run" without re-entering it.
 
 **With environment parameter:**
 ```
@@ -430,12 +444,15 @@ Deployment buttons construct URLs that may be visible in:
 - Use POST-based deployment tools when possible
 - Ensure deployment tools have proper authentication
 
-### Access Control
+### Access Control & Trust Model
 
 Deployment buttons provide **navigation**, not **authorization**:
 - Users still need proper permissions in the deployment tool
 - Buttons simply construct URLs—they don't bypass security
-- Ensure your deployment tools have appropriate access controls
+- Your deployment system retains full control over execution
+- Versioner requires **no access** to your CI/CD—buttons are navigation only
+
+This trust model keeps Versioner lightweight and secure—no credentials, no code access, no complex integrations.
 
 ## Related Concepts
 

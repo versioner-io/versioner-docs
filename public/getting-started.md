@@ -11,7 +11,9 @@ Before you begin, you'll need:
 
 ## Step 1: Create an Account and Get Your API Key
 
-Visit [app.versioner.io](https://app.versioner.io) to create an account. Once logged in, go to the Settings page and create your first API key.
+Visit [app.versioner.io](https://app.versioner.io) to create an account. New accounts get 30 days of full Enforce-level access to try all features.
+
+Once logged in, go to Settings → API Keys and create your first key.
 
 Your API key will look like this:
 ```
@@ -39,45 +41,74 @@ A universal command-line tool that works with any CI/CD system or deployment env
 
 ### REST API
 
-Direct API access for maximum flexibility and custom integrations. Use any HTTP client or programming language.
+Direct API access for maximum trust, flexibility and custom integrations. Use any HTTP client or programming language.
 
 [:octicons-arrow-right-24: View API Documentation](api/index.md)
 
-## Step 3: Submit Your First Event
+## Step 3: Set Up Notifications (Optional)
+
+Before you submit your first event, connect a Slack channel so you can see deployment activity in real time as it comes in.
+
+Generate a webhook in your Slack administration settings and then go to **Settings → Integrations** and add your Slack webhook URL. Choose the events you want to receive notifications for and Versioner will post to that channel whenever a matching deployment event is received.
+
+!!! note "Slack required"
+    Versioner currently supports Slack for deployment notifications. If your team doesn't use Slack, [let us know](mailto:support@versioner.io) — other notification options are on the roadmap.
+
+## Step 4: Submit Your First Event
 
 Follow the setup instructions in your chosen integration guide to submit your first deployment event. Each guide includes step-by-step instructions and examples.
 
 Once you've submitted an event, you'll receive a JSON response confirming the deployment was tracked successfully.
 
-## Step 4: View Your Deployments
+## Step 5: View Your Deployments
 
 Visit your [dashboard](https://app.versioner.io/dashboard) to see all your environments and deployments in one place.
 
 !!! success "You're all set!"
     You've successfully integrated Versioner and tracked your first deployment. Explore the features below to get even more value from Versioner.
 
-## Next Steps
+## What's Next?
 
-Now that you're up and running, explore more features:
+### Progressive Adoption: Three Levels
 
-### Enhance Your Workflow
-- **[Notifications](concepts/notifications.md)** - Get real-time Slack notifications for deployments and build events
-- **[Deployment Buttons](concepts/deployment-buttons.md)** - Add one-click deployment shortcuts to your workflow
-- **[Releases](concepts/releases.md)** - Group multiple product deployments into coordinated releases
+Versioner works in three levels. Start with visibility, then add control, then governance.
 
-### Learn Core Concepts
-- [Products](concepts/products.md) - Understanding the product concept
-- [Environments](concepts/environments.md) - Defining deployment targets
-- [Versions](concepts/versions.md) - Managing build versions
-- [Deployments](concepts/deployments.md) - Understanding deployment tracking
-- [Variables](concepts/variables.md) - Reusable configuration values
+#### Level 1: Observe
+- You now have visibility into what's deployed where.
+- **Next**: Explore the [Environment State Matrix](concepts/environment-state-matrix.md) to see your deployments organized by product and environment.
 
-### Integration Guides
-- [Native Integrations](integrations/index.md) - Native integrations in various CICD systems
-- [CLI Documentation](cli/index.md) - Universal CLI tool
-- [API Documentation](api/index.md) - Direct API integration
+#### Level 2: Protect
+- Add governed workflows for shipping code.
+- **Next**: Learn about [Deployment Requests](concepts/deployment-requests.md) to create approval gates and track compliance for individual deployment activities.
+
+#### Level 3: Enforce
+- Add automated policies that enforce organizational standards.
+- **Next**: Explore [Deployment Rules](concepts/deployment-rules.md) to define no-deploy windows, required sequences, and approval requirements.
+
+### Learning Path
+
+**1. Get familiar with the basics:**
+
+- [Environment State Matrix](concepts/environment-state-matrix.md) - What's running where
+- [Deployments](concepts/deployments.md) - How tracking works
+- [Products, Versions, Environments](concepts/products.md) - Core data model
+
+**2. Set up notifications:**
+
+- [Notifications](concepts/notifications.md) - Slack alerts and approval emails
+
+**3. Add governance (if on Protect+):**
+
+- [Deployment Requests](concepts/deployment-requests.md) - Create approval workflows
+- [User Roles](concepts/user-roles.md) - Define who can approve what
+
+**4. Enforce policy (if on Enforce):**
+
+- [Deployment Rules](concepts/deployment-rules.md) - Automated policy enforcement
+- [Deployment Buttons](concepts/deployment-buttons.md) - Quick deployment shortcuts
+
 
 ### Need Help?
 - Check the [Interactive API Docs](api/interactive-docs.md) for detailed endpoint documentation
-- Review [Response Codes](api/response-codes.md) for specific error messages
+- Review [Response Codes](api/response-codes.md) for error troubleshooting
 - Contact: support@versioner.io

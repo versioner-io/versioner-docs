@@ -217,16 +217,14 @@ Releases can include rich metadata:
 }
 ```
 
-## Future: Release Approval Workflow
+## Releases vs. Deployment Requests
 
-!!! info "Coming Soon"
-    Release approval workflow is planned for a future release.
+**Releases** and **Deployment Requests** are complementary but serve different purposes:
 
-Planned features:
+- **Releases** — Lightweight grouping for tracking multi-product deployments. Useful for organizing related services.
+- **Deployment Requests** — Governed workflow with approval gates, compliance tracking, and audit trails. Use when you need controlled shipping with sign-offs.
 
-- **Approval gates** - Require approval before production deployment
-- **Pre-flight checks** - Validate release readiness
-- **Approval tracking** - Audit trail of who approved what and when
+For approval workflows and policy enforcement, see [Deployment Requests](deployment-requests.md).
 
 ## Best Practices
 

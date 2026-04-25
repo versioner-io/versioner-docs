@@ -4,137 +4,129 @@ Understanding Versioner's core concepts will help you get the most out of the pl
 
 ## What are Concepts?
 
-Concepts are the fundamental building blocks of Versioner. They represent the entities you work with when tracking deployments:
+Concepts are the fundamental building blocks of Versioner. They represent the entities and workflows you work with:
 
-- **What you build** - Products and Versions
-- **Where you deploy** - Environments
-- **What you track** - Deployments
-- **How you coordinate** - Releases
-- **How you stay informed** - Notifications
-- **How you trigger deployments** - Deployment Buttons
-- **How you configure** - Variables
-- **Who can do what** - User Roles
+- **What you see** - Environment State Matrix, Products, Versions, Environments
+- **How you control** - Deployment Requests, approval gates, pre/post steps
+- **How you govern** - Deployment Rules, policy enforcement, compliance tracking
+- **How you stay informed** - Notifications, email approvals
+- **How you trigger** - Deployment Buttons
+- **Who can do what** - User Roles, approval capabilities
+- **How you configure** - Variables, templates
 
 ## The Versioner Model
 
 Here's how these concepts relate to each other:
 
 ```
-Products
-  └─ Versions (builds of products)
-       └─ Deployments (versions deployed to environments)
-            └─ Environments (where things run)
+Environment State Matrix (Visibility)
+  ├─ Products (what you build)
+  │  └─ Versions (build artifacts)
+  │
+  ├─ Environments (where you deploy)
+  │
+  └─ Deployments (versions deployed to environments)
 
-Releases (coordinated groupings)
-  └─ Versions (multiple products)
-       └─ Deployments (tracked across environments)
+Deployment Requests (Control)
+  ├─ Approval Gates (role-based approvals)
+  ├─ Pre-Deployment Steps (validation)
+  └─ Post-Deployment Steps (verification)
 
-Notifications (alerts about events)
-  └─ Triggered by Deployments, Versions, etc.
+Deployment Rules (Governance)
+  ├─ Schedule Rules (no-deploy windows)
+  ├─ Flow Rules (required sequences)
+  ├─ DR Required Rules (approval gates)
+  └─ Version Approval Rules (required sign-offs)
 
-Variables (configuration values)
-  └─ Used by Deployment Buttons, future features
+Notifications (Communication)
+  ├─ Slack Webhooks (event-based alerts)
+  └─ DR Approval Emails (action-oriented)
 
-Deployment Buttons (quick deployment access)
-  └─ Use Variables to create dynamic URLs
-
-User Roles (access control)
-  └─ Define what users can view and modify
+Supporting Features
+  ├─ Deployment Buttons (quick access)
+  ├─ Variables (URL templates)
+  ├─ Releases (multi-product tracking)
+  └─ User Roles (permissions)
 ```
 
-## Start Here: The Basics
+## Start Here: Visibility
 
-### 1. Products
+### Environment State Matrix
 
-**What:** Deployable software components (microservices, apps, libraries)
+**What:** A grid showing what version of each product is running in each environment.
 
-**Why it matters:** Products are the primary organizational unit. Everything else is organized around products.
+**Why it matters:** This is your single source of truth for what's deployed where. See drift, track deployment progress, understand current state.
 
-**Example:** `user-service`, `payment-api`, `web-frontend`
+[Learn about Environment State Matrix →](environment-state-matrix.md)
 
-[Learn about Products →](products.md)
+### Core Building Blocks
 
-### 2. Versions
+Then understand the basic concepts that feed into the matrix:
 
-**What:** Specific builds or releases of a product
+- **[Products](products.md)** - Deployable software components (microservices, apps)
+- **[Versions](versions.md)** - Build artifacts ready to deploy
+- **[Environments](environments.md)** - Deployment targets (dev, staging, production)
+- **[Deployments](deployments.md)** - Records of what's deployed where
 
-**Why it matters:** Versions represent what can be deployed. They track build metadata and source control information.
+## Next: Control & Governance
 
-**Example:** `1.2.3`, `abc123def`, `2024.11.06.1`
+### Deployment Requests (Protect Tier+)
 
-[Learn about Versions →](versions.md)
+**What:** Governed workflow for shipping code with approval gates and audit trails
 
-### 3. Environments
+**Why it matters:** Control who can deploy what, when, and ensure compliance with your processes.
 
-**What:** Deployment targets where your software runs
+[Learn about Deployment Requests →](deployment-requests.md)
 
-**Why it matters:** Environments define where versions get deployed. They help you track what's running where.
+### Deployment Rules (Enforce Tier+)
 
-**Example:** `development`, `staging`, `production`
+**What:** Automated policies that gate, sequence, and enforce your deployment standards
 
-[Learn about Environments →](environments.md)
+**Why it matters:** Automatically enforce no-deploy windows, required sequences, approval requirements.
 
-### 4. Deployments
+[Learn about Deployment Rules →](deployment-rules.md)
 
-**What:** Records of versions deployed to environments
+## Supporting Features
 
-**Why it matters:** Deployments are the core tracking mechanism. They answer "what version is running where?"
+### Notifications
 
-**Example:** `user-service:1.2.3` deployed to `production` at `2024-11-06 15:30:00`
+**What:** Slack webhooks for events + email notifications for approvals
 
-[Learn about Deployments →](deployments.md)
-
-## Advanced Concepts
-
-### 5. Releases
-
-**What:** Coordinated groupings of multiple product versions
-
-**Why it matters:** Releases help you track multi-product deployments and coordinate go-live timing.
-
-**Example:** "Q4 Sprint 3" includes `user-service:1.2.3`, `payment-api:4.5.6`, `notification-service:2.1.0`
-
-[Learn about Releases →](releases.md)
-
-### 6. Notifications
-
-**What:** Real-time alerts about deployment and build events
-
-**Why it matters:** Notifications keep your team informed about what's happening across your environments.
-
-**Example:** Slack message when production deployment succeeds or fails
+**Why it matters:** Keep your team informed and route approvals to the right people.
 
 [Learn about Notifications →](notifications.md)
 
-### 7. Variables
+### User Roles
 
-**What:** Reusable configuration values that can be referenced throughout Versioner
+**What:** Role-based permissions that define who can approve what
 
-**Why it matters:** Variables eliminate repetition and enable dynamic templates for deployment buttons and future features.
+**Why it matters:** Align permissions with your org structure and governance needs.
 
-**Example:** `rundeck_base_url = "https://rundeck.mycompany.com"`
+[Learn about User Roles →](user-roles.md)
 
-[Learn about Variables →](variables.md)
+### Releases
 
-### 8. Deployment Buttons
+**What:** Lightweight grouping for tracking multi-product deployments
 
-**What:** One-click shortcuts to your deployment tools with pre-configured parameters
+**Why it matters:** Coordinate releases across services. Complement to Deployment Requests.
 
-**Why it matters:** Deployment buttons streamline your deployment workflow by automatically filling in version numbers and other parameters.
+[Learn about Releases →](releases.md)
 
-**Example:** Click "Deploy" in Slack → Rundeck opens with version 1.2.3 pre-filled
+### Deployment Buttons
+
+**What:** One-click shortcuts to your deployment tools
+
+**Why it matters:** Trigger deployments faster with version and environment pre-filled.
 
 [Learn about Deployment Buttons →](deployment-buttons.md)
 
-### 9. User Roles
+### Variables
 
-**What:** Access control that defines what users can view and modify
+**What:** Reusable configuration values for templates
 
-**Why it matters:** User roles ensure team members have appropriate permissions for their responsibilities.
+**Why it matters:** Avoid repetition and maintain deployment tools configuration in one place.
 
-**Example:** Developers can deploy, viewers can only observe, admins can manage team settings
-
-[Learn about User Roles →](user-roles.md)
+[Learn about Variables →](variables.md)
 
 ## Common Workflows
 
@@ -206,15 +198,18 @@ User Roles (access control)
 
 If you're new to Versioner, we recommend reading the concepts in this order:
 
-1. **[Products](products.md)** - Understand what you're deploying
-2. **[Versions](versions.md)** - Learn about build tracking
-3. **[Environments](environments.md)** - Define your deployment targets
-4. **[Deployments](deployments.md)** - Track what's running where
-5. **[Releases](releases.md)** - Coordinate multi-product deployments
-6. **[Notifications](notifications.md)** - Stay informed about events
-7. **[Variables](variables.md)** - Configure reusable values
-8. **[Deployment Buttons](deployment-buttons.md)** - Streamline deployment workflows
-9. **[User Roles](user-roles.md)** - Manage team access and permissions
+1. **[Environment State Matrix](environment-state-matrix.md)** - Understand what you're seeing
+2. **[Products](products.md)** - What you're deploying
+3. **[Versions](versions.md)** - Build artifacts
+4. **[Environments](environments.md)** - Deployment targets
+5. **[Deployments](deployments.md)** - How tracking works
+6. **[Deployment Requests](deployment-requests.md)** - Governed workflows (if on Protect+)
+7. **[Deployment Rules](deployment-rules.md)** - Policy enforcement (if on Enforce+)
+8. **[Notifications](notifications.md)** - Stay informed
+9. **[User Roles](user-roles.md)** - Team permissions and approvals
+10. **[Deployment Buttons](deployment-buttons.md)** - Quick deployment access
+11. **[Variables](variables.md)** - Template configuration
+12. **[Releases](releases.md)** - Multi-product tracking
 
 ## Key Principles
 
@@ -248,22 +243,15 @@ Certain entities are immutable to maintain data integrity:
 
 **Reliable audit trail** - know exactly what happened and when!
 
-## Next Steps
+## Ready to Get Started?
 
-Ready to dive deeper? Choose a concept to explore:
-
-- [Products](products.md) - Deployable software components
-- [Versions](versions.md) - Build artifacts and releases
-- [Deployments](deployments.md) - Deployment tracking
-- [Releases](releases.md) - Multi-product coordination
-- [Environments](environments.md) - Deployment targets
-- [Notifications](notifications.md) - Real-time alerts
-- [Variables](variables.md) - Reusable configuration values
-- [Deployment Buttons](deployment-buttons.md) - One-click deployment shortcuts
-- [User Roles](user-roles.md) - Team access and permissions
+1. Check out the [Environment State Matrix](environment-state-matrix.md) to see your deployments
+2. Set up [Notifications](notifications.md) to stay informed
+3. For governance: Explore [Deployment Requests](deployment-requests.md) and [Deployment Rules](deployment-rules.md)
 
 Or jump to integration guides:
 
 - [Native Integrations](../integrations/index.md) - Platform-specific plugins
+- [MCP Server](../agents/mcp.md) - AI agent integration
 - [CLI](../cli/index.md) - Universal command-line tool
 - [API](../api/index.md) - Direct API integration
