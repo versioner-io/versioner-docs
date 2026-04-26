@@ -66,7 +66,7 @@ Submit version events to track builds. The recommended approach is to use a nati
     status: completed
 ```
 
-See the [CI/CD Integrations](../../integrations/ci-cd.md) page for setup instructions for each integration type, including the CLI and direct API.
+See the [CI/CD Integrations](../../integrations/index.md) page for setup instructions for each integration type, including the CLI and direct API.
 
 ## Version Metadata
 

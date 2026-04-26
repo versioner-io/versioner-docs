@@ -75,7 +75,7 @@ Include helpful metadata:
 
 - **[Versions](versions.md)** - Builds of products that can be deployed
 - **[Deployments](deployments.md)** - Records of product versions deployed to environments
-- **[Deployment Requests](../deployment-requests.md)** - Coordinated deployments of multiple products
+- **[Deployment Requests](../governance/deployment-requests.md)** - Coordinated deployments of multiple products
 - **[Environments](environments.md)** - Where products get deployed
 
 ## Next Steps

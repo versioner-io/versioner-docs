@@ -23,12 +23,12 @@ flowchart LR
 
 ## 🚀 Quick Start
 
-1. **[Create an account](getting-started.md#step-1-create-an-account-and-get-your-api-key)** — Sign up and get your API key
+1. **[Create an account](getting-started/quick-start.md#step-1-create-an-account-and-get-your-api-key)** — Sign up and get your API key
 2. **Choose your integration:**
      - [Native Integrations](integrations/index.md) — GitHub Actions and more
      - [CLI](cli/index.md) — any CI/CD system
      - [REST API](api/index.md) — custom integrations
-3. **[Submit your first event](getting-started.md#step-4-submit-your-first-event)** — Track your first deployment
+3. **[Submit your first event](getting-started/quick-start.md#step-4-submit-your-first-event)** — Track your first deployment
 
 ## Core Concepts
 

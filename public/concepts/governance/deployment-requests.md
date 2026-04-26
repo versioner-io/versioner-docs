@@ -177,4 +177,4 @@ Templates are reusable DR configurations that pre-define approval slots, pre/pos
 
 - Learn about [Deployment Rules](deployment-rules.md) to automate policy enforcement
 - Explore [User Roles](../configuration/user-roles.md) to understand approval capabilities
-- Check [Getting Started](../../getting-started.md) for setup guidance
+- Check [Getting Started](../../getting-started/quick-start.md) for setup guidance
