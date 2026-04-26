@@ -6,13 +6,8 @@ The **Versioner CLI** is a command-line tool for tracking deployments and builds
 
 A single-binary tool that submits deployment and build events to Versioner from any CI/CD system, IaC tool, or custom script.
 
-## When to Use the CLI
-
-**Use the CLI when:**
-
-- Your CI/CD system doesn't have a [native integration](../integrations/index.md)
-- You're deploying from scripts or IaC tools (Terraform, Ansible, etc.)
-- You need maximum flexibility for custom workflows
+!!! info "Choosing an Integration"
+    The CLI works with any CI/CD system or script. If your platform has a [native integration](../integrations/index.md), that's usually simpler. For custom tooling that needs full HTTP control, use the [REST API](../api/index.md) instead.
 
 ## Key Features
 

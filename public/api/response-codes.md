@@ -349,26 +349,6 @@ except requests.exceptions.HTTPError as e:
     raise
 ```
 
-## Common Issues
-
-### "field required" Validation Error
-
-**Problem:** Missing required field in request.
-
-**Solution:** Check API documentation for required fields.
-
-### "Invalid authentication credentials"
-
-**Problem:** API key is wrong or missing.
-
-**Solution:** Verify API key and Authorization header format.
-
-### "Not found"
-
-**Problem:** Resource doesn't exist or wrong URL.
-
-**Solution:** Check resource ID and URL path.
-
 ## Next Steps
 
 - Review [Authentication](authentication.md)

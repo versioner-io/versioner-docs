@@ -43,7 +43,9 @@ extra_css:
 # Navigation structure
 nav:
   - Home: index.md
-  - Getting Started: getting-started.md
+  - Getting Started:
+      - Quick Start: getting-started/quick-start.md
+      - How It Works: getting-started/how-it-works.md
   - CI/CD Integrations:
       - Overview: integrations/index.md
       - Troubleshooting: integrations/troubleshooting.md

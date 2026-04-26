@@ -1,78 +1,14 @@
 # API Overview
 
-The **Versioner REST API** provides direct programmatic access to all Versioner functionality. Use it when building custom integrations, internal tools, or when you need maximum control over your deployment tracking.
-
-## What is the API?
-
-The Versioner API is a RESTful HTTP API that lets you:
+The **Versioner REST API** (`https://api.versioner.io`) provides direct programmatic access to all Versioner functionality. Use it when building custom integrations, internal tools, or when you need maximum control over your deployment tracking.
 
 - **Submit events** - Track deployments and builds programmatically
 - **Query data** - Retrieve deployment history, versions, and products
 - **Manage resources** - Create and update products, environments, and releases
 - **Configure notifications** - Set up webhooks and notification preferences
 
-## When to Use the API
-
-### ✅ Use the API When:
-
-**Building custom integrations**
-
-- Internal deployment platforms
-- Custom CI/CD systems
-- Proprietary tooling
-
-**You need programmatic access**
-
-- Automated workflows
-- Data synchronization
-- Integration with other systems
-
-**Maximum control required**
-
-- Custom event payloads
-- Advanced error handling
-- Specific retry logic
-
-### 🔧 Use Native Integrations Instead When:
-
-**Your platform is supported**
-
-- GitHub Actions, Jenkins, Bitbucket, etc.
-- Easier setup with automatic metadata extraction
-
-[View Native Integrations →](../integrations/index.md)
-
-### 🔧 Use the CLI Instead When:
-
-**You're using unsupported CI/CD systems**
-
-- Simpler than making HTTP requests
-- Built-in retry logic and error handling
-- Auto-detection of CI/CD metadata
-
-[View CLI Documentation →](../cli/index.md)
-
-## Base URL
-
-**Production:** `https://api.versioner.io`
-**Development:** `https://dev-api.versioner.io`
-
-## Authentication
-
-Versioner uses **dual authentication**:
-
-- **API Keys** - For event tracking (`/build-events/`, `/deployment-events/`)
-- **JWT Tokens** - For dashboard and resource management (all other endpoints)
-
-```http
-# API Key (for CI/CD event tracking)
-Authorization: Bearer sk_mycompany_k1_...
-
-# JWT Token (for dashboard/CRUD)
-Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...
-```
-
-See [Authentication](../api/authentication.md) for details.
+!!! info "Choosing an Integration"
+    The API is best for custom integrations and internal tooling that need full control. For standard CI/CD pipelines, the [CLI](../cli/index.md) or a [native integration](../integrations/index.md) is usually simpler.
 
 ## Quick Start
 
