@@ -36,29 +36,31 @@ graph LR
 
 ## Deployment Events
 
-You submit deployment events to track state changes:
+You submit deployment events to track state changes. The recommended approach is to use a native integration — the [Versioner GitHub Action](../../integrations/github-action.md) handles this automatically as part of your workflow:
 
-```bash
-# Deployment started
-POST /deployment-events/
-{
-  "product_name": "my-service",
-  "version": "1.2.3",
-  "environment_name": "production",
-  "status": "started"
-}
+```yaml
+- name: Record Deployment Started in Versioner
+  uses: versioner-io/versioner-github-action@v1
+  with:
+    api-key: ${{ secrets.VERSIONER_API_KEY }}
+    product: my-service
+    version: ${{ github.sha }}
+    event-type: deployment
+    status: started
+    environment: production
 
-# Deployment completed
-POST /deployment-events/
-{
-  "product_name": "my-service",
-  "version": "1.2.3",
-  "environment_name": "production",
-  "status": "success"
-}
+- name: Record Deployment Completed in Versioner
+  uses: versioner-io/versioner-github-action@v1
+  with:
+    api-key: ${{ secrets.VERSIONER_API_KEY }}
+    product: my-service
+    version: ${{ github.sha }}
+    event-type: deployment
+    status: success
+    environment: production
 ```
 
-See [Event Types](../../api/event-types.md) for details.
+See [Event Types](../../api/event-types.md) for the full list of status values and payload options.
 
 ## Deployment Metadata
 
