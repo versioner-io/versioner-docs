@@ -4,6 +4,8 @@ A **version** represents a specific build or release of a product that can be de
 
 ## Overview
 
+A **build** is the CI/CD action that produces a deployable instance of your product — the **version** is that instance. Versioner tracks the version (the what) and lets you attach context about the build that produced it (the how and when).
+
 Versions are created when you build your software. Each version has:
 
 - **Product** - Which product this version belongs to
@@ -51,33 +53,24 @@ hotfix-auth-bug
 
 ## Version Events
 
-Submit version events to track builds:
+Submit version events to track builds. The recommended approach is to use a native integration — the [Versioner GitHub Action](../../integrations/github-action.md) handles this automatically as part of your workflow:
 
-```bash
-# Build started
-POST /version-events/
-{
-  "product_name": "my-service",
-  "version": "1.2.3",
-  "status": "started",
-  "built_by": "github-actions"
-}
-
-# Build completed
-POST /version-events/
-{
-  "product_name": "my-service",
-  "version": "1.2.3",
-  "status": "completed",
-  "scm_sha": "abc123def456",
-  "scm_branch": "main",
-  "build_url": "https://github.com/..."
-}
+```yaml
+- name: Record Build Completed in Versioner
+  uses: versioner-io/versioner-github-action@v1
+  with:
+    api-key: ${{ secrets.VERSIONER_API_KEY }}
+    product: my-service
+    version: ${{ github.sha }}
+    event-type: build
+    status: completed
 ```
+
+See the [CI/CD Integrations](../../integrations/ci-cd.md) page for setup instructions for each integration type, including the CLI and direct API.
 
 ## Version Metadata
 
-Versions can include rich metadata:
+Versions can carry rich metadata to capture build context. When submitted via the API directly, the full payload looks like this:
 
 ```json
 {
@@ -103,40 +96,14 @@ Versions can include rich metadata:
 
 ## Auto-Creation
 
-Versions are automatically created when you submit events:
+Versions are automatically created when you submit events — no need to pre-create them. Submitting a deployment event for a version that doesn't exist yet will create it on-demand.
 
-```bash
-# First deployment of version 1.2.3 creates the version
-POST /deployment-events/
-{
-  "product_name": "my-service",
-  "version": "1.2.3",
-  "environment_name": "dev",
-  "status": "success"
-}
-```
+## Viewing Versions
 
-No need to pre-create versions - they're created on-demand.
+You can view all versions for a product from the **Products** page in the dashboard.
 
-## Querying Versions
-
-### List All Versions
-
-```bash
-GET /versions/?product=my-service
-```
-
-### Get Version Details
-
-```bash
-GET /versions/{version-id}
-```
-
-### Find by Commit SHA
-
-```bash
-GET /versions/?scm_sha=abc123def456
-```
+!!! warning "Versions are immutable"
+    Once created, a version's identifier cannot be changed. Version records are append-only — new events update the version's status, but the version itself is a permanent record.
 
 ## Use Cases
 
@@ -173,5 +140,5 @@ Link builds to source control:
 ## Next Steps
 
 - Learn about [Deployments](deployments.md)
-- Explore [Event Types](../api/event-types.md)
-- See the [Interactive API Docs](../api/interactive-docs.md)
+- Explore [Event Types](../../api/event-types.md)
+- See the [Interactive API Docs](../../api/interactive-docs.md)

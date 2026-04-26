@@ -16,6 +16,21 @@
   background-color: #1a1a1a;
 }
 
+/* Nav section headings — spacing to separate groups */
+.md-nav__item--section > label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding-top: 0.75rem;
+  display: block;
+}
+
+/* TOC (right nav) title heading */
+.md-nav--secondary .md-nav__title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding-top: 0.75rem;
+}
+
 /* Teal header row + vertical borders on all tables */
 [data-md-color-scheme="slate"] .md-typeset table:not([class]) {
   border-collapse: collapse;

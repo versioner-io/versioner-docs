@@ -58,7 +58,7 @@ POST /deployment-events/
 }
 ```
 
-See [Event Types](../api/event-types.md) for details.
+See [Event Types](../../api/event-types.md) for details.
 
 ## Deployment Metadata
 
@@ -139,10 +139,10 @@ Analyze deployment patterns:
 
 - **[Versions](versions.md)** - What gets deployed
 - **[Environments](environments.md)** - Where deployments go
-- **[Notifications](notifications.md)** - Get alerted about deployments
+- **[Notifications](../configuration/notifications.md)** - Get alerted about deployments
 
 ## Next Steps
 
 - Learn about [Versions](versions.md)
-- Set up [Notifications](notifications.md)
-- Explore the [Interactive API Docs](../api/interactive-docs.md)
+- Set up [Notifications](../configuration/notifications.md)
+- Explore the [Interactive API Docs](../../api/interactive-docs.md)

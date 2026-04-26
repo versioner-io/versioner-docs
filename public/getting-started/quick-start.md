@@ -71,37 +71,37 @@ Versioner works in three levels. Start with visibility, then add control, then g
 
 #### Level 1: Observe
 - You now have visibility into what's deployed where.
-- **Next**: Explore the [Environment State Matrix](../concepts/environment-state-matrix.md) to see your deployments organized by product and environment.
+- **Next**: Explore the [Environment State Matrix](../concepts/governance/environment-state-matrix.md) to see your deployments organized by product and environment.
 
 #### Level 2: Protect
 - Add governed workflows for shipping code.
-- **Next**: Learn about [Deployment Requests](../concepts/deployment-requests.md) to create approval gates and track compliance.
+- **Next**: Learn about [Deployment Requests](../concepts/governance/deployment-requests.md) to create approval gates and track compliance.
 
 #### Level 3: Enforce
 - Add automated policies that enforce organizational standards.
-- **Next**: Explore [Deployment Rules](../concepts/deployment-rules.md) to define no-deploy windows, required sequences, and approval requirements.
+- **Next**: Explore [Deployment Rules](../concepts/governance/deployment-rules.md) to define no-deploy windows, required sequences, and approval requirements.
 
 ### Learning Path
 
 **1. Get familiar with the basics:**
 
-- [Environment State Matrix](../concepts/environment-state-matrix.md) — what's running where
-- [Deployments](../concepts/deployments.md) — how tracking works
-- [Products, Versions, Environments](../concepts/products.md) — core data model
+- [Environment State Matrix](../concepts/governance/environment-state-matrix.md) — what's running where
+- [Deployments](../concepts/catalog/deployments.md) — how tracking works
+- [Products, Versions, Environments](../concepts/catalog/products.md) — core data model
 
 **2. Set up notifications:**
 
-- [Notifications](../concepts/notifications.md) — Slack alerts and approval emails
+- [Notifications](../concepts/configuration/notifications.md) — Slack alerts and approval emails
 
 **3. Add governance (Protect and above):**
 
-- [Deployment Requests](../concepts/deployment-requests.md) — approval workflows
-- [User Roles](../concepts/user-roles.md) — who can approve what
+- [Deployment Requests](../concepts/governance/deployment-requests.md) — approval workflows
+- [User Roles](../concepts/configuration/user-roles.md) — who can approve what
 
 **4. Enforce policy (Enforce tier):**
 
-- [Deployment Rules](../concepts/deployment-rules.md) — automated policy enforcement
-- [Deployment Buttons](../concepts/deployment-buttons.md) — quick deployment shortcuts
+- [Deployment Rules](../concepts/governance/deployment-rules.md) — automated policy enforcement
+- [Deployment Buttons](../concepts/configuration/deployment-buttons.md) — quick deployment shortcuts
 
 ### Need Help?
 

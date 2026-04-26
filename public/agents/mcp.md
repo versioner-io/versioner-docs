@@ -452,9 +452,9 @@ except MCP_AuthError:
 
 ## Related Concepts
 
-- **[Environment State Matrix](../concepts/environment-state-matrix.md)** - Data behind queries
-- **[Deployment Requests](../concepts/deployment-requests.md)** - What you're ultimately deploying
-- **[Deployment Rules](../concepts/deployment-rules.md)** - What advisory preflight checks against
+- **[Environment State Matrix](../concepts/governance/environment-state-matrix.md)** - Data behind queries
+- **[Deployment Requests](../concepts/governance/deployment-requests.md)** - What you're ultimately deploying
+- **[Deployment Rules](../concepts/governance/deployment-rules.md)** - What advisory preflight checks against
 - **[API Documentation](../api/index.md)** - Underlying API that MCP is built on
 
 ## Next Steps

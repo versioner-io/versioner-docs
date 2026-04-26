@@ -24,7 +24,7 @@ Required fields are missing or contain invalid values.
 
 ## Deployment Rule Violations
 
-These errors are returned when a [Deployment Rule](../concepts/deployment-rules.md) blocks a deployment. They always fail the workflow — `fail-on-api-error: false` does **not** suppress them.
+These errors are returned when a [Deployment Rule](../concepts/governance/deployment-rules.md) blocks a deployment. They always fail the workflow — `fail-on-api-error: false` does **not** suppress them.
 
 ### 423 Locked — No-Deploy Window Active
 
@@ -49,7 +49,7 @@ For emergencies, an admin can temporarily set the blocking rule to **Report Only
 
 Before enabling a new Deployment Rule in enforcing mode, set it to **Report Only**. Violations will be logged and visible in the dashboard but won't block deployments. Switch to **Enabled** once you're confident the policy is correct.
 
-See [Deployment Rules](../concepts/deployment-rules.md) for details.
+See [Deployment Rules](../concepts/governance/deployment-rules.md) for details.
 
 ## Still stuck?
 

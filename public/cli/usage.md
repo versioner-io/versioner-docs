@@ -37,7 +37,7 @@ Configuration values are resolved in this order:
 
 ### track deployment
 
-Emit a `started` event **before** your deployment script runs and Versioner will evaluate any open [Deployment Requests](../concepts/deployment-requests.md) or matching [Deployment Rules](../concepts/deployment-rules.md). If the deployment violates a policy (no-deploy window, missing approval, flow violation), the CLI exits with a non-zero code and your pipeline fails before anything is deployed. Emit a `completed` or `failed` event after the deployment finishes to close out the record.
+Emit a `started` event **before** your deployment script runs and Versioner will evaluate any open [Deployment Requests](../concepts/governance/deployment-requests.md) or matching [Deployment Rules](../concepts/governance/deployment-rules.md). If the deployment violates a policy (no-deploy window, missing approval, flow violation), the CLI exits with a non-zero code and your pipeline fails before anything is deployed. Emit a `completed` or `failed` event after the deployment finishes to close out the record.
 
 ```bash
 versioner track deployment [OPTIONS]
@@ -105,7 +105,7 @@ fi
 
 ### track build
 
-Tracking builds registers a **version** in Versioner. Versions are the unit Versioner uses for deployment tracking and notifications. When a build completes, Versioner can notify your team with the version that's ready to deploy. If you've set up [Deployment Buttons](../concepts/deployment-buttons.md), that notification becomes actionable: one click deploys directly from the notification or the dashboard.
+Tracking builds registers a **version** in Versioner. Versions are the unit Versioner uses for deployment tracking and notifications. When a build completes, Versioner can notify your team with the version that's ready to deploy. If you've set up [Deployment Buttons](../concepts/configuration/deployment-buttons.md), that notification becomes actionable: one click deploys directly from the notification or the dashboard.
 
 ```bash
 versioner track build [OPTIONS]
@@ -175,7 +175,7 @@ versioner track deployment --product my-api --environment production --fail-on-a
 ```
 
 !!! note "Deployment Rule Violations"
-    Rule violations (exit code 5) always fail regardless of this flag. See [Deployment Rules](../concepts/deployment-rules.md).
+    Rule violations (exit code 5) always fail regardless of this flag. See [Deployment Rules](../concepts/governance/deployment-rules.md).
 
 ---
 

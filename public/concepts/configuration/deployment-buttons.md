@@ -458,12 +458,12 @@ This trust model keeps Versioner lightweight and secure—no credentials, no cod
 
 - **[Variables](variables.md)** - Configuration system powering deployment buttons
 - **[Notifications](notifications.md)** - Slack notifications include deployment buttons
-- **[Deployments](deployments.md)** - Track deployments triggered via buttons
-- **[Environments](environments.md)** - Deployment buttons are scoped to environments
+- **[Deployments](../catalog/deployments.md)** - Track deployments triggered via buttons
+- **[Environments](../catalog/environments.md)** - Deployment buttons are scoped to environments
 
 ## Next Steps
 
 - Set up [Variables](variables.md) for your deployment tools
 - Configure [Notifications](notifications.md) to receive deployment buttons in Slack
-- Learn about [Products](products.md) to understand product-level configuration
-- Explore the [API Documentation](../api/index.md) for programmatic template management
+- Learn about [Products](../catalog/products.md) to understand product-level configuration
+- Explore the [API Documentation](../../api/index.md) for programmatic template management

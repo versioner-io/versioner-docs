@@ -375,4 +375,4 @@ Use `extra_metadata` for custom tracking:
 - **Easier integration:** Use the [CLI](../cli/index.md) or [GitHub Action](../integrations/github-action.md)
 - **Event types:** See [Event Types](event-types.md) for all status values
 - **Error handling:** Review [Response Codes](response-codes.md)
-- **Notifications:** Set up [Slack notifications](../concepts/notifications.md)
+- **Notifications:** Set up [Slack notifications](../concepts/configuration/notifications.md)

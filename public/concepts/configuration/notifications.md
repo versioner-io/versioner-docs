@@ -74,7 +74,7 @@ POST /notification-preferences/
 | `version.failed` | Build fails |
 | `version.aborted` | Build cancelled |
 
-See [Event Types](../api/event-types.md) for details.
+See [Event Types](../../api/event-types.md) for details.
 
 ### Filters
 
@@ -368,7 +368,7 @@ DR approval emails are **not individually configurable** (they're part of the DR
 - **Create DR templates** — Pre-configure approval slots for common workflows
 - **Use role permissions** — Control who has approval permissions via user roles
 
-See [Deployment Requests](deployment-requests.md) and [User Roles](user-roles.md) for details.
+See [Deployment Requests](../governance/deployment-requests.md) and [User Roles](user-roles.md) for details.
 
 ### No Email Fatigue
 
@@ -381,11 +381,11 @@ Unlike Slack webhooks (which can be noisy), DR approval emails are **selective**
 
 ## Related Concepts
 
-- **[Deployments](deployments.md)** - What triggers notifications
-- **[Event Types](../api/event-types.md)** - All available event types
+- **[Deployments](../catalog/deployments.md)** - What triggers notifications
+- **[Event Types](../../api/event-types.md)** - All available event types
 
 ## Next Steps
 
 - Set up notification channels via the [dashboard](https://app.versioner.io/settings)
 - Configure notification preferences in your account settings
-- Learn about [Event Types](../api/event-types.md)
+- Learn about [Event Types](../../api/event-types.md)

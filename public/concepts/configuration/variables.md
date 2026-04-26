@@ -140,7 +140,7 @@ Variables can be created through the Versioner UI:
 4. Save
 
 !!! tip "API Access"
-    Variables can also be managed via the API. See the [API Documentation](../api/index.md) for details.
+    Variables can also be managed via the API. See the [API Documentation](../../api/index.md) for details.
 
 ### Editing Variables
 
@@ -309,11 +309,11 @@ Planned features that will use variables:
 ## Related Concepts
 
 - **[Deployment Buttons](deployment-buttons.md)** - Use variables to create deployment URLs
-- **[Products](products.md)** - Product-level variables are scoped to products
-- **[Environments](environments.md)** - System variables include environment information
+- **[Products](../catalog/products.md)** - Product-level variables are scoped to products
+- **[Environments](../catalog/environments.md)** - System variables include environment information
 
 ## Next Steps
 
 - Learn how to use variables in [Deployment Buttons](deployment-buttons.md)
-- Explore [Products](products.md) to understand product-level scoping
-- Check the [API Documentation](../api/index.md) for programmatic variable management
+- Explore [Products](../catalog/products.md) to understand product-level scoping
+- Check the [API Documentation](../../api/index.md) for programmatic variable management

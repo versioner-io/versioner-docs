@@ -22,40 +22,14 @@ Versioner categorizes environments into types:
 | **staging** | Pre-production environments | staging, uat, preprod |
 | **production** | Production environments | production, prod, live |
 
-### Auto-Detection
+Environment types serve two purposes: they control how environments are ordered and grouped in the dashboard and Deployment Requests, and they give Versioner a sense of your deployment progression — so features like promotion tracking and deployment rules can reason about which environments are "earlier" or "later" in your pipeline.
 
-When you submit events, Versioner automatically detects environment types based on names:
-
-```bash
-# Automatically detected as "production" type
-POST /deployment-events/
-{
-  "environment_name": "production"
-}
-
-# Automatically detected as "staging" type
-POST /deployment-events/
-{
-  "environment_name": "staging"
-}
-```
+!!! Auto-Detection
+    Versioner automatically infers the environment type from the name you provide, using the patterns in the table above. No explicit type configuration is required.
 
 ## Creating Environments
 
-Environments are automatically created when you first deploy to them:
-
-```bash
-# First deployment to "production" creates the environment
-POST /deployment-events/
-{
-  "product_name": "my-service",
-  "version": "1.2.3",
-  "environment_name": "production",
-  "status": "success"
-}
-```
-
-No pre-configuration needed!
+Environments are created automatically the first time you deploy to them — no pre-configuration needed. If you want to set one up ahead of time, you can create it from the dashboard.
 
 ## Environment Metadata
 
@@ -89,64 +63,6 @@ Or different naming schemes:
 - **qa-regression** (test)
 - **qa-smoke** (test)
 
-## Querying Environments
-
-### List All Environments
-
-```bash
-GET /environments/
-```
-
-### Filter by Type
-
-```bash
-GET /environments/?type=production
-```
-
-### Get Environment Details
-
-```bash
-GET /environments/{environment-id}
-```
-
-## Use Cases
-
-### Deployment Tracking
-
-Track what's deployed to each environment:
-
-```
-Production:     my-service v1.2.3 (deployed 2 hours ago)
-Staging:        my-service v1.2.4 (deployed 30 minutes ago)
-Dev:            my-service v1.3.0 (deployed 5 minutes ago)
-```
-
-### Environment Drift Detection
-
-Detect when environments are out of sync:
-
-- Production running v1.2.3
-- Staging running v1.2.4
-- **Alert:** Staging is ahead of production!
-
-### Deployment Flows
-
-Enforce deployment order:
-
-```
-dev → test → staging → production
-```
-
-Pre-flight checks are coming soon - stay tuned!
-
-### No-Deploy Windows
-
-Restrict deployments to certain environments:
-
-- No production deployments on Fridays after 3pm
-- No staging deployments during business hours
-- Holiday freeze windows
-
 ## Best Practices
 
 ### 1. Consistent Naming
@@ -154,11 +70,13 @@ Restrict deployments to certain environments:
 Use consistent environment names across products:
 
 ✅ **Good:**
+
 - `production`
 - `staging`
 - `dev`
 
 ❌ **Avoid:**
+
 - `prod` (for one product)
 - `production` (for another product)
 - `live` (for a third product)
@@ -168,10 +86,12 @@ Use consistent environment names across products:
 For multiple environments of the same type, use descriptive names:
 
 ✅ **Good:**
+
 - `production-us-east`
 - `production-eu-west`
 
 ❌ **Avoid:**
+
 - `production-1`
 - `production-2`
 
@@ -180,6 +100,7 @@ For multiple environments of the same type, use descriptive names:
 Let Versioner auto-detect types when possible:
 
 ✅ **Auto-detected:**
+
 - `production` → production type
 - `staging` → staging type
 - `dev` → dev type
@@ -188,10 +109,10 @@ Let Versioner auto-detect types when possible:
 
 - **[Deployments](deployments.md)** - Deploying to environments
 - **[Versions](versions.md)** - What gets deployed
-- **[Notifications](notifications.md)** - Environment-specific alerts
+- **[Notifications](../configuration/notifications.md)** - Environment-specific alerts
 
 ## Next Steps
 
 - Learn about [Deployments](deployments.md)
-- Set up [Notifications](notifications.md) per environment
-- Explore the [Interactive API Docs](../api/interactive-docs.md)
+- Set up [Notifications](../configuration/notifications.md) per environment
+- Explore the [Interactive API Docs](../../api/interactive-docs.md)

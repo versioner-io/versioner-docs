@@ -218,7 +218,7 @@ The following table shows key capabilities for each role:
 | Manage billing | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ |
 
 !!! note "Deployment Request Approvals"
-    In Deployment Requests, each approval slot is assigned a type (e.g., "qa", "security", "product"). Multiple users with the same role can exist, but only one approval per type is needed to complete that approval slot. See [Deployment Requests](deployment-requests.md) for details.
+    In Deployment Requests, each approval slot is assigned a type (e.g., "qa", "security", "product"). Multiple users with the same role can exist, but only one approval per type is needed to complete that approval slot. See [Deployment Requests](../governance/deployment-requests.md) for details.
 
 ## Managing User Roles
 
@@ -384,13 +384,13 @@ All role changes are logged:
 
 ## Related Concepts
 
-- **[Products](products.md)** - What users can deploy
-- **[Environments](environments.md)** - Where users can deploy
-- **[Deployment Requests](deployment-requests.md)** - Approval workflows that use roles
+- **[Products](../catalog/products.md)** - What users can deploy
+- **[Environments](../catalog/environments.md)** - Where users can deploy
+- **[Deployment Requests](../governance/deployment-requests.md)** - Approval workflows that use roles
 - **[Notifications](notifications.md)** - Email notifications for approvals
 
 ## Next Steps
 
-- Learn about [Deployment Requests](deployment-requests.md) for approval workflows
-- See [API Authentication](../api/authentication.md) for managing API keys
-- Explore the [Interactive API Docs](../api/interactive-docs.md)
+- Learn about [Deployment Requests](../governance/deployment-requests.md) for approval workflows
+- See [API Authentication](../../api/authentication.md) for managing API keys
+- Explore the [Interactive API Docs](../../api/interactive-docs.md)

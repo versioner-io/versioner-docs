@@ -75,18 +75,21 @@ nav:
       - MCP Server: agents/mcp.md
   - Concepts:
       - Overview: concepts/index.md
-      - Environment State Matrix: concepts/environment-state-matrix.md
-      - Deployment Requests: concepts/deployment-requests.md
-      - Deployment Rules: concepts/deployment-rules.md
-      - Products: concepts/products.md
-      - Versions: concepts/versions.md
-      - Deployments: concepts/deployments.md
-      - Environments: concepts/environments.md
-      - Notifications: concepts/notifications.md
-      - User Roles: concepts/user-roles.md
-      - Deployment Buttons: concepts/deployment-buttons.md
-      - Variables: concepts/variables.md
-      - Releases: concepts/releases.md
+      - Catalog:
+          - Products: concepts/catalog/products.md
+          - Versions: concepts/catalog/versions.md
+          - Environments: concepts/catalog/environments.md
+          - Deployments: concepts/catalog/deployments.md
+          - Releases: concepts/catalog/releases.md
+      - Governance:
+          - Environment State Matrix: concepts/governance/environment-state-matrix.md
+          - Deployment Requests: concepts/governance/deployment-requests.md
+          - Deployment Rules: concepts/governance/deployment-rules.md
+      - Configuration:
+          - Variables: concepts/configuration/variables.md
+          - User Roles: concepts/configuration/user-roles.md
+          - Notifications: concepts/configuration/notifications.md
+          - Deployment Buttons: concepts/configuration/deployment-buttons.md
 
 # Markdown extensions
 markdown_extensions:

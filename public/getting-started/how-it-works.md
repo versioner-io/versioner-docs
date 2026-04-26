@@ -23,7 +23,7 @@ When the build finishes, send `completed` or `failed`. On success, Versioner reg
 
 From that notification (or from the Versioner dashboard), someone can:
 
-- Click a [Deployment Button](../concepts/deployment-buttons.md) to trigger your deployment system directly
+- Click a [Deployment Button](../concepts/configuration/deployment-buttons.md) to trigger your deployment system directly
 - Copy the version number and plug it into your CI/CD system manually
 
 **Skipping the build phase is fine.** If you only send deployment events, Versioner creates the version on the fly. You just won't get the "ready to deploy" Slack notification.
@@ -40,14 +40,14 @@ This is when Versioner enforces policy. On receiving a `started` event, Versione
 
 **Deployment Requests**
 
-If there's an open [Deployment Request](../concepts/deployment-requests.md) covering this product/environment combination, Versioner checks whether it's ready to proceed:
+If there's an open [Deployment Request](../concepts/governance/deployment-requests.md) covering this product/environment combination, Versioner checks whether it's ready to proceed:
 
 - All required approvals obtained
 - All pre-deploy checklist steps marked complete
 
 **Deployment Rules**
 
-Versioner also evaluates any [Deployment Rules](../concepts/deployment-rules.md) that match the target product or environment:
+Versioner also evaluates any [Deployment Rules](../concepts/governance/deployment-rules.md) that match the target product or environment:
 
 - **Schedule rules** — blocks deployment during a defined no-deploy window (e.g. weekends, release freezes)
 - **DR Requirement rules** — requires any deployment to this product/environment to be associated with an open Deployment Request
@@ -100,6 +100,6 @@ sequenceDiagram
 ## Next Steps
 
 - [Quick Start](quick-start.md) — send your first event in minutes
-- [Deployment Requests](../concepts/deployment-requests.md) — approval gates and pre-deploy steps
-- [Deployment Rules](../concepts/deployment-rules.md) — automated policy enforcement
+- [Deployment Requests](../concepts/governance/deployment-requests.md) — approval gates and pre-deploy steps
+- [Deployment Rules](../concepts/governance/deployment-rules.md) — automated policy enforcement
 - [CI/CD Integrations](../integrations/index.md) — choose your integration method

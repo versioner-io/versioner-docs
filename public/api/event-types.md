@@ -206,5 +206,5 @@ The API accepts flexible status strings and maps them to canonical event types.
 
 - [How It Works](../getting-started/how-it-works.md) — full build and deploy lifecycle
 - [Event Tracking API](event-tracking.md) — endpoint reference
-- [Notifications](../concepts/notifications.md) — configure which events trigger alerts
-- [Deployments](../concepts/deployments.md)
+- [Notifications](../concepts/configuration/notifications.md) — configure which events trigger alerts
+- [Deployments](../concepts/catalog/deployments.md)

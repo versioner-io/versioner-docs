@@ -40,7 +40,7 @@ Add the Versioner action to your workflow:
 | `scm-sha` | Git commit SHA | `${{ github.sha }}` |
 | `build-url` | Link to workflow run | Auto-generated |
 
-**Note:** Deployment Rule violations always fail the workflow (exit codes 5, 423, 428). See [Deployment Rules](../concepts/deployment-rules.md) to understand and configure rules. Use report-only mode to test policies before enforcing.
+**Note:** Deployment Rule violations always fail the workflow (exit codes 5, 423, 428). See [Deployment Rules](../concepts/governance/deployment-rules.md) to understand and configure rules. Use report-only mode to test policies before enforcing.
 
 ## Examples
 
@@ -155,7 +155,7 @@ Allow deployments to proceed even if Versioner API is unavailable:
     fail-on-api-error: false  # Don't block deployment if Versioner is down
 ```
 
-**Important:** Deployment Rule violations will still fail the workflow. To test policies before enforcing, use report-only mode in the rule settings. See [Deployment Rules](../concepts/deployment-rules.md) for details.
+**Important:** Deployment Rule violations will still fail the workflow. To test policies before enforcing, use report-only mode in the rule settings. See [Deployment Rules](../concepts/governance/deployment-rules.md) for details.
 
 ## Best Practices
 

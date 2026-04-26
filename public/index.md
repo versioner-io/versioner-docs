@@ -32,12 +32,12 @@ flowchart LR
 
 ## Core Concepts
 
-- **[Environment State Matrix](concepts/environment-state-matrix.md)** — See what's deployed where at a glance
-- **[Deployment Requests](concepts/deployment-requests.md)** — A governance envelope for an individual deployment event
-- **[Deployment Rules](concepts/deployment-rules.md)** — Org-wide policies that enforce governance across deployments
-- **[Products](concepts/products.md)** — Deployable software components
-- **[Versions](concepts/versions.md)** — A build artifact or git ref that's ready to deploy
-- **[Environments](concepts/environments.md)** — Deployment targets (dev, staging, production)
+- **[Environment State Matrix](concepts/governance/environment-state-matrix.md)** — See what's deployed where at a glance
+- **[Deployment Requests](concepts/governance/deployment-requests.md)** — A governance envelope for an individual deployment event
+- **[Deployment Rules](concepts/governance/deployment-rules.md)** — Org-wide policies that enforce governance across deployments
+- **[Products](concepts/catalog/products.md)** — Deployable software components
+- **[Versions](concepts/catalog/versions.md)** — A build artifact or git ref that's ready to deploy
+- **[Environments](concepts/catalog/environments.md)** — Deployment targets (dev, staging, production)
 
 ## 🆘 Support
 

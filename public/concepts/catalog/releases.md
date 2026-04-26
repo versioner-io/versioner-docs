@@ -224,7 +224,7 @@ Releases can include rich metadata:
 - **Releases** — Lightweight grouping for tracking multi-product deployments. Useful for organizing related services.
 - **Deployment Requests** — Governed workflow with approval gates, compliance tracking, and audit trails. Use when you need controlled shipping with sign-offs.
 
-For approval workflows and policy enforcement, see [Deployment Requests](deployment-requests.md).
+For approval workflows and policy enforcement, see [Deployment Requests](../governance/deployment-requests.md).
 
 ## Best Practices
 
@@ -266,4 +266,4 @@ Include helpful context in descriptions:
 
 - Learn about [Products](products.md)
 - Explore [Versions](versions.md)
-- See the [Interactive API Docs](../api/interactive-docs.md)
+- See the [Interactive API Docs](../../api/interactive-docs.md)
