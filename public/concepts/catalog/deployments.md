@@ -49,6 +49,8 @@ You submit deployment events to track state changes. The recommended approach is
     status: started
     environment: production
 
+# ... your deployment steps ...
+
 - name: Record Deployment Completed in Versioner
   uses: versioner-io/versioner-github-action@v1
   with:
@@ -60,7 +62,7 @@ You submit deployment events to track state changes. The recommended approach is
     environment: production
 ```
 
-See [Event Types](../../api/event-types.md) for the full list of status values and payload options.
+See the [CI/CD Integrations](../../integrations/index.md) page for setup instructions for each integration type, including the CLI and direct API.
 
 ## Deployment Metadata
 
