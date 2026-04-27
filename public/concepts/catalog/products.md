@@ -77,9 +77,3 @@ Include helpful metadata:
 - **[Deployments](deployments.md)** - Records of product versions deployed to environments
 - **[Deployment Requests](../governance/deployment-requests.md)** - Coordinated deployments of multiple products
 - **[Environments](environments.md)** - Where products get deployed
-
-## Next Steps
-
-- Learn about [Versions](versions.md)
-- Explore [Deployments](deployments.md)
-- See the [Interactive API Docs](../../api/interactive-docs.md)

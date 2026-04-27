@@ -136,9 +136,3 @@ Link builds to source control:
 - **[Deployments](deployments.md)** - Deploying versions to environments
 - **[Environments](environments.md)** - Where versions get deployed
 - **[Products](products.md)** - What versions belong to
-
-## Next Steps
-
-- Learn about [Deployments](deployments.md)
-- Explore [Event Types](../../api/event-types.md)
-- See the [Interactive API Docs](../../api/interactive-docs.md)

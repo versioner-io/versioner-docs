@@ -165,6 +165,24 @@ Templates are reusable DR configurations that pre-define approval slots, pre/pos
 5. Both services deploy with a single audit record
 ```
 
+## Deployment Progress Tracking
+
+When a DR covers multiple products, the DR detail view shows deployment status across environments:
+
+```
+Product              Version   Dev   Test   Staging   Production
+user-service         1.2.3     ✅    ✅     ✅       ❌
+payment-api          4.5.6     ✅    ✅     ❌       ❌
+notification-service 2.1.0     ✅    ✅     ✅       ✅
+```
+
+| Symbol | Meaning |
+|--------|---------|
+| ✅ | Successfully deployed |
+| ❌ | Not yet deployed |
+| 🔴 | Deployment failed |
+| 🟡 | Deployment in progress |
+
 ## Related Concepts
 
 - **[Deployment Rules](deployment-rules.md)** - Automated enforcement of deployment policy
@@ -172,9 +190,3 @@ Templates are reusable DR configurations that pre-define approval slots, pre/pos
 - **[Environment State Matrix](environment-state-matrix.md)** - See current state before creating a DR
 - **[Products](../catalog/products.md)** - Products are deployed via DRs
 - **[Versions](../catalog/versions.md)** - Versions are what DRs deploy
-
-## Next Steps
-
-- Learn about [Deployment Rules](deployment-rules.md) to automate policy enforcement
-- Explore [User Roles](../configuration/user-roles.md) to understand approval capabilities
-- Check [Getting Started](../../getting-started/quick-start.md) for setup guidance

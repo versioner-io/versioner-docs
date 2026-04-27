@@ -21,7 +21,6 @@ Versioner is built around a small set of concepts. Here's what each one does:
 |---|---|
 | [Deployment Requests](governance/deployment-requests.md) | Governed deploy workflow with approval gates and audit trails *(Govern tier+)* |
 | [Deployment Rules](governance/deployment-rules.md) | Automated policies that gate, sequence, and enforce your deployment standards *(Orchestrate tier+)* |
-| [Releases](catalog/releases.md) | Lightweight grouping for coordinating multi-product deployments |
 | [User Roles](configuration/user-roles.md) | Role-based permissions defining who can approve what |
 
 ## Notifications & Access

@@ -1,319 +1,73 @@
 # Variables
 
-Variables are reusable configuration values used with Deployment Buttons and other Versioner features.
+Variables let you define values once and reference them in [Deployment Button](deployment-buttons.md) URL templates. They keep templates clean and avoid repeating common values like tool base URLs or job IDs across products.
 
-## Overview
-
-Variables allow you to define values once and reuse them across templates. They're primarily used for:
-
-- **Deployment Buttons** — Create dynamic URLs with version and environment pre-filled
-- **Template configuration** — Avoid repeating common values (URLs, IDs, tool names)
-
-See [Deployment Buttons](deployment-buttons.md) to learn how Variables power dynamic deployment shortcuts.
-
-Variables are designed to be flexible and reusable—supporting future features like custom webhooks and integrations.
-
-## Variable Scopes
+## Scopes
 
 Variables can be defined at two levels:
 
-### Organization-Level Variables
+**Organization** — shared across all products. Use for tool base URLs and other org-wide config.
 
-**Shared across all products** in your organization.
-
-**Use for:**
-- Base URLs for shared tools (Rundeck, Jenkins, etc.)
-- Organization-wide configuration
-- Common identifiers
-
-**Example:**
 ```
-rundeck_base_url = "https://rundeck.mycompany.com"
+github_org = "mycompany"
 jenkins_host = "https://jenkins.mycompany.com"
 ```
 
-### Product-Level Variables
+**Product** — specific to one product. Use for product-specific identifiers like repo names or job names.
 
-**Specific to a single product.**
-
-**Use for:**
-- Product-specific identifiers (job IDs, project names)
-- Product-specific configuration
-- Values that differ per product
-
-**Example (for product "user-service"):**
 ```
-rundeck_job_id = "de5587ec-3a68-435f-be33-2d6fe99587c1"
+github_repo = "user-service"
 jenkins_job_name = "deploy-user-service"
 ```
 
-## Variable Precedence
-
-When a variable exists at both levels, **product-level variables override organization-level variables**.
-
-**Example:**
-
-```
-Organization level:
-  api_timeout = "30"
-
-Product level (user-service):
-  api_timeout = "60"
-
-Result for user-service: api_timeout = "60"
-Result for other products: api_timeout = "30"
-```
-
-This allows you to set sensible defaults at the organization level and override them for specific products when needed.
-
-## Naming Conventions
-
-Variable names must follow these rules:
-
-- **Lowercase letters, numbers, and underscores only**
-- **No spaces or special characters**
-- **Descriptive and readable**
-
-✅ **Good names:**
-```
-rundeck_base_url
-jenkins_job_id
-deployment_timeout
-api_endpoint_prod
-```
-
-❌ **Invalid names:**
-```
-Rundeck-URL          # No uppercase or hyphens
-jenkins job          # No spaces
-api.endpoint         # No dots
-vi_custom_var        # vi_* prefix is reserved
-```
+When the same key exists at both levels, the product-level value wins.
 
 ## System Variables
 
-Versioner automatically provides **system variables** that are injected at runtime. These variables are **reserved** and use the `vi_*` prefix.
-
-### Available System Variables
+Versioner automatically injects the following variables at render time. The `vi_*` prefix is reserved — you cannot create variables with it.
 
 | Variable | Description | Example |
 |----------|-------------|---------|
 | `vi_version` | Version number | `1.2.3` |
 | `vi_build_number` | Build number | `42` |
-| `vi_product_id` | Product UUID | `550e8400-e29b-41d4-a716-446655440000` |
+| `vi_product_id` | Product UUID | `550e8400-...` |
 | `vi_product_name` | Product name | `user-service` |
-| `vi_environment_id` | Environment UUID | `660e8400-e29b-41d4-a716-446655440001` |
+| `vi_environment_id` | Environment UUID | `660e8400-...` |
 | `vi_environment_name` | Environment name | `production` |
 | `vi_sha` | Git commit SHA | `abc123def456` |
 
-**You cannot create variables with the `vi_*` prefix** - these are automatically provided by Versioner based on the context.
+## Naming
 
-### Using System Variables
+Variable names must be lowercase letters, numbers, and underscores only — no spaces, hyphens, or dots.
 
-System variables are particularly useful in templates where you need dynamic values:
+✅ `github_org`, `jenkins_job_name`, `api_endpoint_prod`
 
-```
-{rundeck_base_url}/job/{rundeck_job_id}?version={vi_version}
-```
-
-When this template is rendered for version `1.2.3`, it becomes:
-```
-https://rundeck.mycompany.com/job/abc-123?version=1.2.3
-```
+❌ `GitHub-Org`, `jenkins job`, `api.endpoint`, `vi_custom_var`
 
 ## Managing Variables
 
-### Creating Variables
+**Organization variables:** Settings → Organization → Variables
 
-Variables can be created through the Versioner UI:
+**Product variables:** Manage → Products → [Product] → Variables
 
-**Organization Variables:**
-1. Go to **Settings → Organization → Variables**
-2. Click **Add Variable**
-3. Enter key and value
-4. Save
+Both support add, edit, and delete. Variables can also be managed via the [API](../../api/index.md).
 
-**Product Variables:**
-1. Go to **Manage → Products → [Your Product] → Variables**
-2. Click **Add Variable**
-3. Enter key and value
-4. Save
+!!! warning "Sensitive data"
+    Variables are stored in plain text. Do not store passwords or API tokens.
 
-!!! tip "API Access"
-    Variables can also be managed via the API. See the [API Documentation](../../api/index.md) for details.
-
-### Editing Variables
-
-1. Navigate to the variables page (organization or product level)
-2. Click **Edit** next to the variable
-3. Update the value
-4. Save
-
-!!! warning "Impact of Changes"
-    Changing a variable value will affect all templates and features that reference it. Test changes in non-production environments first.
-
-### Deleting Variables
-
-1. Navigate to the variables page
-2. Click **Delete** next to the variable
-3. Confirm deletion
-
-!!! danger "Check Usage First"
-    Before deleting a variable, verify it's not being used in any templates. Deleting a variable that's in use will cause those templates to fail rendering.
-
-## Common Patterns
-
-### Shared Tool Configuration
-
-Define tool base URLs at the organization level:
-
-```
-Organization variables:
-  rundeck_base_url = "https://rundeck.mycompany.com"
-  jenkins_base_url = "https://jenkins.mycompany.com"
-  datadog_base_url = "https://app.datadoghq.com"
-```
-
-Then reference them in product-specific templates without repeating the URLs.
-
-### Environment-Specific Configuration
-
-Use product variables to define environment-specific values:
-
-```
-Product variables (user-service):
-  rundeck_job_id_dev = "abc-123"
-  rundeck_job_id_staging = "def-456"
-  rundeck_job_id_prod = "ghi-789"
-```
-
-### Multi-Stage Pipelines
-
-Define pipeline stages and their configurations:
-
-```
-Organization variables:
-  pipeline_base_url = "https://pipeline.mycompany.com"
-
-Product variables (user-service):
-  pipeline_id = "user-service-deploy"
-  pipeline_stage_dev = "development"
-  pipeline_stage_prod = "production"
-```
-
-## Best Practices
-
-### 1. Use Descriptive Names
-
-Choose names that clearly indicate what the variable contains:
-
-✅ **Good:**
-```
-rundeck_job_id
-jenkins_deploy_url
-slack_webhook_deployments
-```
-
-❌ **Avoid:**
-```
-url1
-id
-config
-```
-
-### 2. Organize by Tool or Purpose
-
-Group related variables with consistent prefixes:
-
-```
-rundeck_base_url
-rundeck_project_name
-rundeck_job_id
-
-jenkins_base_url
-jenkins_job_name
-jenkins_token
-```
-
-### 3. Set Defaults at Organization Level
-
-Define common values at the organization level and only override when necessary:
-
-```
-Organization:
-  deployment_timeout = "300"
-
-Product (critical-service):
-  deployment_timeout = "600"  # Override for critical service
-```
-
-### 4. Document Complex Values
-
-For non-obvious values, consider adding context in your internal documentation:
-
-```
-# rundeck_job_id = "de5587ec-3a68-435f-be33-2d6fe99587c1"
-# This is the UUID for the "Deploy User Service" job in Rundeck
-```
-
-### 5. Avoid Sensitive Data
-
-!!! warning "Security"
-    Variables are currently stored in plain text. Avoid storing sensitive data like passwords or API tokens. Support for secure variables is planned for a future release.
+!!! danger "Before deleting"
+    Check that the variable isn't referenced in any templates — deleting it will cause those templates to fail rendering.
 
 ## Troubleshooting
 
-### Variable Not Found
+**"Missing variable: variable_name"** — the template references a variable that doesn't exist at the org or product level. Check for typos and verify the variable is defined at the right scope.
 
-**Problem:** Template rendering fails with "Missing variable: variable_name"
+**Unexpected value in rendered URL** — a product-level variable is likely overriding an org-level one with the same key. Check both scopes.
 
-**Solution:**
-1. Verify the variable exists at the organization or product level
-2. Check for typos in the variable name
-3. Ensure you're looking at the correct product's variables
+**Can't create variable** — name must be lowercase with underscores only, no `vi_*` prefix, and the key must not already exist at that scope.
 
-### Wrong Value Being Used
+## Related
 
-**Problem:** Variable has unexpected value in rendered output
-
-**Solution:**
-1. Check if a product-level variable is overriding an organization-level variable
-2. Verify you're viewing the correct scope (organization vs product)
-3. Clear browser cache if viewing in UI
-
-### Cannot Create Variable
-
-**Problem:** Error when creating a variable
-
-**Solution:**
-1. Verify the variable name follows naming conventions (lowercase, underscores only)
-2. Check that you're not using the reserved `vi_*` prefix
-3. Ensure a variable with the same name doesn't already exist at that scope
-
-## Use Cases
-
-### Current
-
-Variables are used by:
-
-- **[Deployment Buttons](deployment-buttons.md)** - Create dynamic URLs to your deployment tools with version and environment pre-filled
-
-### Future
-
-Planned features that will use variables:
-
-- **Email Templates** - Personalize notification emails
-- **Custom Webhooks** - Configure webhook URLs and payloads
-- **Third-Party Integrations** - Connect to additional tools
-
-## Related Concepts
-
-- **[Deployment Buttons](deployment-buttons.md)** - Use variables to create deployment URLs
-- **[Products](../catalog/products.md)** - Product-level variables are scoped to products
-- **[Environments](../catalog/environments.md)** - System variables include environment information
-
-## Next Steps
-
-- Learn how to use variables in [Deployment Buttons](deployment-buttons.md)
-- Explore [Products](../catalog/products.md) to understand product-level scoping
-- Check the [API Documentation](../../api/index.md) for programmatic variable management
+- [Deployment Buttons](deployment-buttons.md) — how variables are used in templates
+- [Products](../catalog/products.md) — product-level variable scoping
+- [Environments](../catalog/environments.md) — system variables include environment context

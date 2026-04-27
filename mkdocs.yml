@@ -80,7 +80,6 @@ nav:
           - Versions: concepts/catalog/versions.md
           - Environments: concepts/catalog/environments.md
           - Deployments: concepts/catalog/deployments.md
-          - Releases: concepts/catalog/releases.md
       - Governance:
           - Environment State Matrix: concepts/governance/environment-state-matrix.md
           - Deployment Requests: concepts/governance/deployment-requests.md

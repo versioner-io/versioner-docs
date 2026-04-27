@@ -1,14 +1,23 @@
 # Deployment Buttons
 
-Trigger governed deployments directly from Versioner's UI or Slack notifications with one-click shortcuts to your deployment tools.
+Trigger deployments directly from Versioner's UI or Slack notifications with one-click shortcuts to your deployment tools.
 
 ## Overview
 
-Deployment buttons provide quick access to your deployment tools by generating pre-configured URLs that link to your existing deployment infrastructure (Rundeck, Jenkins, custom tools, etc.).
-
-**Key principle:** Deployment buttons are shortcuts to your deployment tools. They construct URLs and open them in your browser, with version and environment information pre-filled where supported.
+Deployment buttons provide quick access to your deployment tools by generating pre-configured URLs that link to your existing deployment infrastructure (Jenkins, GitLab CI, custom tools, etc.).
 
 **Important:** Versioner requires no access to your CI/CD system. Buttons simply navigate to your tools—your deployment system retains full control.
+
+### Pre-fill vs. Navigate-Only
+
+Not all CI/CD systems support URL-based parameter pre-filling, and it matters for how your team experiences deployment buttons:
+
+| Behavior | Examples | What happens |
+|----------|----------|--------------|
+| **Pre-fill** | Jenkins, GitLab CI, custom tools | Button opens the tool with version and environment already populated. User clicks Run. |
+| **Navigate-only** | GitHub Actions | Button opens the workflow page. User still clicks "Run workflow" and fills in parameters manually. |
+
+For GitHub Actions, the button takes you directly to the right workflow, which still saves navigation time—but expect one extra manual step compared to tools that support pre-fill.
 
 ## Why Use Deployment Buttons?
 
@@ -16,9 +25,9 @@ Deployment buttons provide quick access to your deployment tools by generating p
 
 ```
 1. Receive Slack notification: "Build v1.2.3 ready"
-2. Open Rundeck in browser
-3. Navigate to correct project
-4. Find the deployment job
+2. Open Jenkins in browser
+3. Navigate to correct job
+4. Click "Build with Parameters"
 5. Manually enter version: 1.2.3
 6. Select environment
 7. Click run
@@ -29,55 +38,11 @@ Deployment buttons provide quick access to your deployment tools by generating p
 ```
 1. Receive Slack notification: "Build v1.2.3 ready"
 2. Click "Deploy" button
-3. Rundeck opens with version 1.2.3 pre-filled
+3. Jenkins opens with version 1.2.3 pre-filled
 4. Click run
 ```
 
 **Result:** Faster deployments, fewer errors, better team efficiency.
-
-## Use Cases
-
-### Rundeck Deployments
-
-Navigate directly to a Rundeck job with the version pre-filled:
-
-```
-https://rundeck.mycompany.com/project/DevDeployments/job/show/de5587ec?opt.git_ref=1.2.3
-```
-
-### GitHub Actions Deployments
-
-Open a GitHub Actions workflow to trigger manually:
-
-```
-https://github.com/myorg/my-service/actions/workflows/deploy.yml
-```
-
-**Note:** GitHub Actions doesn't support pre-filling version/environment in the URL. The button opens the workflow trigger page, and you click "Run Workflow" to fill in parameters manually. This ensures safety—versions can't be accidentally mis-specified by URL manipulation.
-
-### Jenkins Deployments
-
-Open a Jenkins job with build parameters ready:
-
-```
-https://jenkins.mycompany.com/job/deploy-api/buildWithParameters?VERSION=1.2.3&ENV=production
-```
-
-### Custom Deployment Tools
-
-Link to any web-based deployment system:
-
-```
-https://deploy.mycompany.com/products/my-api/deploy?version=1.2.3&target=staging
-```
-
-### Slack-Driven Workflows
-
-1. CI/CD builds version `1.2.3`
-2. Versioner sends Slack notification with "Deploy" button
-3. Team member clicks button
-4. Deployment tool opens with correct parameters
-5. Review and execute deployment
 
 ## How It Works
 
@@ -95,11 +60,10 @@ Variables store reusable configuration values. See the [Variables](variables.md)
 
 ```
 Organization level:
-  rundeck_base_url = "https://rundeck.mycompany.com"
+  jenkins_base_url = "https://jenkins.mycompany.com"
 
 Product level (user-service):
-  rundeck_project = "DevDeployments"
-  rundeck_job_id = "de5587ec-3a68-435f-be33-2d6fe99587c1"
+  jenkins_job_name = "deploy-user-service"
 ```
 
 ### 2. Templates
@@ -109,27 +73,27 @@ Templates are URL patterns that reference variables using `{variable_name}` synt
 **Example template:**
 
 ```
-{rundeck_base_url}/project/{rundeck_project}/job/show/{rundeck_job_id}?opt.git_ref={vi_version}
+{jenkins_base_url}/job/{jenkins_job_name}/buildWithParameters?VERSION={vi_version}&ENV={vi_environment_name}
 ```
 
-**Rendered URL (for version 1.2.3):**
+**Rendered URL (for version 1.2.3, staging):**
 
 ```
-https://rundeck.mycompany.com/project/DevDeployments/job/show/de5587ec?opt.git_ref=1.2.3
+https://jenkins.mycompany.com/job/deploy-user-service/buildWithParameters?VERSION=1.2.3&ENV=staging
 ```
 
 Notice how:
-- `{rundeck_base_url}` → organization variable
-- `{rundeck_project}` → product variable
-- `{rundeck_job_id}` → product variable
-- `{vi_version}` → system variable (automatically provided)
+- `{jenkins_base_url}` → organization variable
+- `{jenkins_job_name}` → product variable
+- `{vi_version}` and `{vi_environment_name}` → system variables (automatically provided)
 
 ### 3. Environment Association
 
 Each template is associated with one or more environments (dev, staging, production, etc.). This determines where the deployment button appears.
 
 **Example:**
-- Template: "Deploy to Rundeck"
+
+- Template: "Deploy to Jenkins"
 - Associated environments: development, staging, production
 - Result: Deploy button appears for all three environments
 
@@ -137,21 +101,16 @@ Each template is associated with one or more environments (dev, staging, product
 
 ### Step 1: Define Variables
 
-Start by defining the variables you'll need in your templates.
-
 **Organization variables** (Settings → Organization → Variables):
 
 ```
-rundeck_base_url = "https://rundeck.mycompany.com"
 jenkins_base_url = "https://jenkins.mycompany.com"
 ```
 
 **Product variables** (Manage → Products → [Product] → Variables):
 
 ```
-rundeck_project = "DevDeployments"
-rundeck_job_id = "de5587ec-3a68-435f-be33-2d6fe99587c1"
-rundeck_option_name = "git_ref"
+jenkins_job_name = "deploy-user-service"
 ```
 
 !!! tip "Start Simple"
@@ -162,10 +121,10 @@ rundeck_option_name = "git_ref"
 Navigate to **Manage → Products → [Product] → Deployment Templates**.
 
 1. Click **New Template**
-2. Enter a name: `Deploy to Rundeck`
+2. Enter a name: `Deploy to Jenkins`
 3. Enter the URL template:
    ```
-   {rundeck_base_url}/project/{rundeck_project}/job/show/{rundeck_job_id}?opt.{rundeck_option_name}={vi_version}
+   {jenkins_base_url}/job/{jenkins_job_name}/buildWithParameters?VERSION={vi_version}&ENV={vi_environment_name}
    ```
 4. Select environments: development, staging, production
 5. Preview the template to verify it renders correctly
@@ -183,135 +142,74 @@ Navigate to **Manage → Products → [Product] → Deployment Templates**.
 
 ### In the UI
 
-Deployment buttons appear in multiple locations:
-
-**Dashboard:**
-```
-Recent Versions
-┌─────────────────────────────────────────────┐
-│ user-service  │ 1.2.3  │ [Deploy ▼]        │
-│                                              │
-│ Deploy to:                                   │
-│   • development                              │
-│   • staging                                  │
-│   • production                               │
-└─────────────────────────────────────────────┘
-```
-
-**Versions Page:**
-```
-Versions
-┌─────────────────────────────────────────────┐
-│ Version │ SHA     │ Created │ Actions       │
-├─────────────────────────────────────────────┤
-│ 1.2.3   │ abc123  │ 2h ago  │ [Deploy ▼]    │
-└─────────────────────────────────────────────┘
-```
-
-**Releases Page:**
-```
-Release: Q4 Sprint 3
-┌─────────────────────────────────────────────┐
-│ Product      │ Version │ Status │ Actions   │
-├─────────────────────────────────────────────┤
-│ user-service │ 1.2.3   │ ✓ Dev  │ [Deploy ▼]│
-└─────────────────────────────────────────────┘
-```
-
 **Button behavior:**
+
 - **Single environment:** Direct button (no dropdown)
 - **Multiple environments:** Dropdown menu
 - **Click:** Opens deployment tool in new browser tab
 
 ### In Slack
 
-When Versioner sends Slack notifications, deployment buttons are automatically included:
-
-```
-🚀 New build ready: user-service v1.2.3
-
-Build: #42
-SHA: abc123def
-Environment: development
-
-[Deploy]
-```
-
-Clicking the button opens your deployment tool with the correct parameters.
+When Versioner sends Slack notifications, deployment buttons are automatically included. Clicking the button opens your deployment tool with the correct parameters.
 
 !!! info "Notification Setup Required"
     Deployment buttons in Slack require [notification preferences](notifications.md) to be configured.
 
-## Template Examples
-
-### Rundeck
-
-**Basic deployment with version pre-filled:**
-```
-{rundeck_base_url}/project/{rundeck_project}/job/show/{rundeck_job_id}?opt.version={vi_version}
-```
-
-This pre-populates the version field—Rundeck receives the version from the URL and the user can click "Run" without re-entering it.
-
-**With environment parameter:**
-```
-{rundeck_base_url}/project/{rundeck_project}/job/show/{rundeck_job_id}?opt.version={vi_version}&opt.environment={vi_environment_name}
-```
+## Examples by CI/CD System
 
 ### Jenkins
 
-**Build with parameters:**
+Supports pre-fill. Jenkins accepts build parameters in the URL via `buildWithParameters`:
+
 ```
 {jenkins_base_url}/job/{jenkins_job_name}/buildWithParameters?VERSION={vi_version}&ENV={vi_environment_name}
 ```
 
-**Parameterized build with SHA:**
+With SHA:
 ```
 {jenkins_base_url}/job/{jenkins_job_name}/buildWithParameters?GIT_SHA={vi_sha}&TARGET={vi_environment_name}
 ```
 
+### GitLab CI
+
+Supports pre-fill. GitLab's new pipeline page accepts variables via URL query params:
+
+```
+https://gitlab.com/{gitlab_group}/{gitlab_project}/-/pipelines/new?var[VERSION]={vi_version}&var[ENV]={vi_environment_name}
+```
+
+### GitHub Actions
+
+Navigate-only. The URL opens the workflow dispatch page; users click "Run workflow" and fill in parameters manually.
+
+```
+https://github.com/{org}/{repo}/actions/workflows/deploy.yml
+```
+
+!!! note "GitHub Actions is navigate-only"
+    GitHub Actions doesn't support pre-filling parameters via URL. The button navigates directly to the right workflow, saving navigation time—but the user still enters parameters manually.
+
 ### Custom Tools
 
-**REST API trigger:**
+Any web-based deployment system that accepts URL parameters:
+
 ```
 {deploy_tool_url}/api/deploy?product={vi_product_name}&version={vi_version}&env={vi_environment_name}
-```
-
-**Dashboard link:**
-```
-{deploy_dashboard_url}/deployments/new?product_id={vi_product_id}&version={vi_version}
 ```
 
 ## Advanced Configuration
 
 ### Multiple Templates per Product
 
-You can create multiple templates for different deployment scenarios:
+Create separate templates for different scenarios:
 
-**Template 1: "Deploy to Rundeck"**
+**Template 1: "Deploy to Staging"**
 - Environments: development, staging
-- URL: `{rundeck_base_url}/job/{rundeck_job_id_nonprod}?version={vi_version}`
+- URL: `{jenkins_base_url}/job/{jenkins_job_name_nonprod}/buildWithParameters?VERSION={vi_version}`
 
 **Template 2: "Deploy to Production"**
 - Environments: production
-- URL: `{rundeck_base_url}/job/{rundeck_job_id_prod}?version={vi_version}`
-
-### Environment-Specific Variables
-
-Use different variables for different environments:
-
-```
-Product variables:
-  rundeck_job_id_dev = "abc-123"
-  rundeck_job_id_staging = "def-456"
-  rundeck_job_id_prod = "ghi-789"
-
-Template:
-  {rundeck_base_url}/job/{rundeck_job_id_{vi_environment_name}}?version={vi_version}
-```
-
-!!! warning "Complex Templates"
-    While Versioner supports complex templates, simpler templates are easier to maintain. Consider creating separate templates for different environments instead of complex variable substitution.
+- URL: `{jenkins_base_url}/job/{jenkins_job_name_prod}/buildWithParameters?VERSION={vi_version}`
 
 ### Conditional Parameters
 
@@ -323,7 +221,7 @@ Add optional parameters using URL query strings:
 
 ## Best Practices
 
-### 1. Test Templates Before Saving
+### Test Templates Before Saving
 
 Always use the preview feature to verify your template renders correctly:
 
@@ -333,126 +231,60 @@ Always use the preview feature to verify your template renders correctly:
 4. Verify the rendered URL
 5. Click **Test URL** to open it in a new tab
 
-### 2. Start with Organization Variables
+### Start with Organization Variables
 
-Define common values at the organization level:
+Define common values at the organization level to avoid repetition across products:
 
 ```
 Organization:
-  rundeck_base_url = "https://rundeck.mycompany.com"
   jenkins_base_url = "https://jenkins.mycompany.com"
 ```
 
-This avoids repetition across products.
+### Use Descriptive Template Names
 
-### 3. Use Descriptive Template Names
+✅ Good: "Deploy to Jenkins Staging", "Trigger Production Pipeline"
 
-Choose names that clearly indicate what the template does:
+❌ Avoid: "Template 1", "Deploy", "Button"
 
-✅ **Good:**
-- "Deploy to Rundeck"
-- "Trigger Jenkins Production Pipeline"
-- "Open Deployment Dashboard"
+### Keep Templates Simple
 
-❌ **Avoid:**
-- "Template 1"
-- "Deploy"
-- "Button"
-
-### 4. Keep Templates Simple
-
-Simpler templates are easier to maintain and debug:
-
-✅ **Good:**
+✅ Good:
 ```
-{rundeck_base_url}/job/{rundeck_job_id}?version={vi_version}
+{jenkins_base_url}/job/{jenkins_job_name}/buildWithParameters?VERSION={vi_version}
 ```
 
-❌ **Overly complex:**
+❌ Overly complex:
 ```
 {base_url}/api/v{api_version}/projects/{project_id}/environments/{env_id}/deployments/create?version={vi_version}&sha={vi_sha}&build={vi_build_number}&user={user_id}&timestamp={timestamp}
-```
-
-### 5. Document Your Variables
-
-Keep track of what each variable represents, especially for IDs and UUIDs:
-
-```
-rundeck_job_id = "de5587ec-3a68-435f-be33-2d6fe99587c1"
-# This is the "Deploy User Service to Dev" job in Rundeck
 ```
 
 ## Troubleshooting
 
 ### Button Not Appearing
 
-**Problem:** Deployment button doesn't show up in UI or Slack.
-
-**Solution:**
-1. Verify template is enabled
-2. Check that template is associated with the environment
-3. Ensure all variables in template exist
-4. Check for rendering errors in template preview
+Verify the template is enabled and associated with the environment. Check that all variables used in the template exist and the template preview shows no rendering errors.
 
 ### Wrong URL Generated
 
-**Problem:** Clicking button opens incorrect URL.
-
-**Solution:**
-1. Preview the template to see rendered URL
-2. Verify variable values are correct
-3. Check for typos in variable names
-4. Ensure product-level variables aren't unintentionally overriding organization variables
+Use the template preview to see the rendered URL. Verify variable values are correct and check for typos in variable names.
 
 ### Missing Variable Error
 
-**Problem:** Template preview shows "Missing variable: variable_name"
-
-**Solution:**
-1. Create the missing variable at organization or product level
-2. Check for typos in variable name (case-sensitive)
-3. Verify you're using correct variable scope
-
-### Button Opens Wrong Tool
-
-**Problem:** Button opens wrong deployment tool or environment.
-
-**Solution:**
-1. Check which template is associated with that environment
-2. Verify template URL points to correct tool
-3. Review variable values for that product
+Create the missing variable at organization or product level. Variable names are case-sensitive.
 
 ### Multiple Buttons for Same Environment
 
-**Problem:** Multiple deployment buttons appear for the same environment.
-
-**Solution:**
-- Each environment can only be associated with one template per product
-- If you see multiple buttons, check for templates from different products or misconfiguration
+Each environment can only be associated with one template per product. If you see multiple buttons, check for misconfigured templates.
 
 ## Security Considerations
 
-### URL Parameters
+Deployment buttons construct URLs that may be visible in browser history, server logs, and network traffic.
 
-Deployment buttons construct URLs that may be visible in:
-- Browser history
-- Server logs
-- Network traffic
-
-**Recommendations:**
 - Avoid including sensitive data in templates
 - Use POST-based deployment tools when possible
 - Ensure deployment tools have proper authentication
 
-### Access Control & Trust Model
-
-Deployment buttons provide **navigation**, not **authorization**:
-- Users still need proper permissions in the deployment tool
-- Buttons simply construct URLs—they don't bypass security
-- Your deployment system retains full control over execution
-- Versioner requires **no access** to your CI/CD—buttons are navigation only
-
-This trust model keeps Versioner lightweight and secure—no credentials, no code access, no complex integrations.
+Deployment buttons provide **navigation**, not **authorization**. Users still need proper permissions in the deployment tool—buttons simply construct URLs and don't bypass security. Versioner requires no credentials or code access.
 
 ## Related Concepts
 
@@ -460,10 +292,3 @@ This trust model keeps Versioner lightweight and secure—no credentials, no cod
 - **[Notifications](notifications.md)** - Slack notifications include deployment buttons
 - **[Deployments](../catalog/deployments.md)** - Track deployments triggered via buttons
 - **[Environments](../catalog/environments.md)** - Deployment buttons are scoped to environments
-
-## Next Steps
-
-- Set up [Variables](variables.md) for your deployment tools
-- Configure [Notifications](notifications.md) to receive deployment buttons in Slack
-- Learn about [Products](../catalog/products.md) to understand product-level configuration
-- Explore the [API Documentation](../../api/index.md) for programmatic template management
