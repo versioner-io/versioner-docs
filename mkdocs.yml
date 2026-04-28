@@ -145,6 +145,9 @@ plugins:
   - git-revision-date-localized:
       enable_creation_date: true
       type: timeago
+  - redirects:
+      redirect_maps:
+        getting-started/index.md: getting-started/quick-start.md
 
 # Extra configuration
 extra:

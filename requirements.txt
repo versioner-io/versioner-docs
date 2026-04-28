@@ -8,4 +8,4 @@ mkdocs-git-revision-date-localized-plugin>=1.2.0
 # Optional: Additional plugins for future use
 mkdocs-mermaid2-plugin>=1.1.0  # For diagrams
 # mkdocs-minify-plugin>=0.7.0    # Minify HTML/CSS/JS
-# mkdocs-redirects>=1.2.0        # URL redirects
+mkdocs-redirects>=1.2.0         # URL redirects
