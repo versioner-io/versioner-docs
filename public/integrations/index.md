@@ -1,4 +1,4 @@
-# CI/CD Integrations
+# Integrations
 
 Versioner integrates with your existing deployment workflow — no need to consolidate tools or change your process. Choose the integration method that fits your stack.
 
@@ -22,6 +22,7 @@ Pick based on your platform and how much control you need:
 Pre-built plugins for specific CI/CD platforms. Minimal configuration, automatic metadata extraction.
 
 - [GitHub Action](github-action.md) ✅ — Available now
+- [Vercel](vercel.md) ✅ — Available now
 - Bitbucket Pipelines — Coming soon
 - GitLab CI — Coming soon
 - Jenkins — Coming soon
