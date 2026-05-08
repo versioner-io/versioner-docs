@@ -95,7 +95,7 @@ You can create multiple API keys per account — useful for key rotation, separa
 
 ## Personal Access Tokens (PATs)
 
-PATs are for programmatic access. They're user-scoped and designed for agents, scripts, and integrations that work with Versioner data. The [MCP server](../agents/mcp.md) uses PATs for this purpose.
+PATs are for programmatic access. They're user-scoped and designed for agents, scripts, and integrations that work with Versioner data. The [MCP server](../integrations/mcp.md) uses PATs for this purpose.
 
 !!! info "Expanding scope"
     PAT support currently covers read operations. Write access via PATs is planned — check the [interactive docs](interactive-docs.md) for the current endpoint list.

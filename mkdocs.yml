@@ -71,9 +71,11 @@ nav:
           - Event Types: api/event-types.md
           - Interactive Docs: api/interactive-docs.md
           - Response Codes: api/response-codes.md
-  - Agents:
-      - Overview: agents/index.md
-      - MCP Server: agents/mcp.md
+      - MCP:
+          - MCP Server: integrations/mcp.md
+  - Guides:
+      - Overview: guides/index.md
+      - Tracking Terraform / IaC Versions: guides/terraform.md
   - Concepts:
       - Overview: concepts/index.md
       - Catalog:
@@ -149,6 +151,8 @@ plugins:
   - redirects:
       redirect_maps:
         getting-started/index.md: getting-started/quick-start.md
+        agents/index.md: integrations/mcp.md
+        agents/mcp.md: integrations/mcp.md
 
 # Extra configuration
 extra:

@@ -1,10 +1,10 @@
 # Integrations
 
-Versioner integrates with your existing deployment workflow — no need to consolidate tools or change your process. Choose the integration method that fits your stack.
+Versioner integrates with your existing deployment workflow — no need to consolidate tools or change your process.
 
-## When to Use Which Integration
+## Sending Deployment Events
 
-Pick based on your platform and how much control you need:
+Choose the method that fits your stack:
 
 | | Native Integration | CLI | REST API |
 |---|---|---|---|
@@ -12,10 +12,8 @@ Pick based on your platform and how much control you need:
 | **Setup** | Minimal | Low | Medium |
 | **Configuration** | Platform-native YAML | Flags & env vars | HTTP requests |
 | **Metadata extraction** | Automatic | Automatic | Manual |
-| **Platform support** | GitHub Actions (more coming) | Universal | Universal |
+| **Platform support** | GitHub Actions, Vercel | Universal | Universal |
 | **Customization** | Limited | Medium | Maximum |
-
-## Available Integrations
 
 ### Native Integrations
 
@@ -38,6 +36,14 @@ A universal command-line tool that works with any system. Drop it into any pipel
 Direct HTTP access for custom integrations, internal deployment platforms, or when you want full control over exactly what gets sent.
 
 [API Documentation →](../api/index.md)
+
+## AI Agent Access
+
+### MCP Server
+
+Connect AI assistants (Claude, Cursor, and others) to live Versioner data via the Model Context Protocol. Query deployment state, check environment status, and run advisory preflight checks — all from within your AI agent workflow.
+
+[MCP Server →](mcp.md)
 
 ## Request an Integration
 
