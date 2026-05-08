@@ -11,18 +11,18 @@ Versioner uses role-based access control (RBAC) to manage permissions. Each user
 
 ## Approval Type Mapping
 
-Deployment request approval slots are assigned an **approval type**. This table shows which roles can fulfill each type:
+Deployment request approval slots are assigned an **approval type**. Each type controls who can approve the slot and which users get notified when the deployment request is in progress.
 
-| Approval Type | Roles That Can Approve |
-|---------------|------------------------|
-| UAT | product, admin, release_manager |
-| QA | qa, admin, release_manager |
-| Performance | sre, qa, admin, release_manager |
-| Security | security, admin, release_manager |
-| Code Review | developer, admin, release_manager |
-| Compliance | compliance, admin, release_manager |
+| Approval Type | Primary Role |
+|---------------|--------------|
+| UAT | Product |
+| QA | QA |
+| Performance | SRE, QA |
+| Security | Security |
+| Code Review | Developer |
+| Compliance | Compliance |
 
-**Note:** Admin and Release Manager can fulfill any approval type.
+**Note:** Admin and Release Manager can approve any approval type.
 
 ## Available Roles
 
