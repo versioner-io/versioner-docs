@@ -211,7 +211,7 @@ versioner track deployment ... || {
 The action handles the API response for you — if a rule blocks the deployment, the step fails and the blocking rule name appears in the workflow log. You don't need to inspect status codes or exit codes directly. See [GitHub Action](../../integrations/github-action.md) for full configuration options.
 
 ```yaml
-- uses: versioner-io/versioner-github-action@v1
+- uses: versioner-io/versioner-github-action@main
   with:
     product: payment-api
     environment: production

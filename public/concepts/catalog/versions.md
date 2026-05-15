@@ -57,7 +57,7 @@ Submit version events to track builds. The recommended approach is to use a nati
 
 ```yaml
 - name: Record Build Completed in Versioner
-  uses: versioner-io/versioner-github-action@v1
+  uses: versioner-io/versioner-github-action@main
   with:
     api-key: ${{ secrets.VERSIONER_API_KEY }}
     product: my-service

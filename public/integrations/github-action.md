@@ -8,7 +8,7 @@ Integrate Versioner into your GitHub Actions workflows to automatically track de
 Add the Versioner action to your workflow:
 
 ```yaml
-- uses: versioner-io/versioner-github-action@v1
+- uses: versioner-io/versioner-github-action@main
   with:
     api-key: ${{ secrets.VERSIONER_API_KEY }}
     product: my-service
@@ -62,7 +62,7 @@ jobs:
       - name: Deploy
         run: ./deploy.sh
 
-      - uses: versioner-io/versioner-github-action@v1
+      - uses: versioner-io/versioner-github-action@main
         with:
           api-key: ${{ secrets.VERSIONER_API_KEY }}
           product: my-service
@@ -87,7 +87,7 @@ jobs:
       - uses: actions/checkout@v3
 
       # Track build start
-      - uses: versioner-io/versioner-github-action@v1
+      - uses: versioner-io/versioner-github-action@main
         with:
           api-key: ${{ secrets.VERSIONER_API_KEY }}
           product: my-service
@@ -99,7 +99,7 @@ jobs:
         run: npm run build
 
       # Track build completion
-      - uses: versioner-io/versioner-github-action@v1
+      - uses: versioner-io/versioner-github-action@main
         if: success()
         with:
           api-key: ${{ secrets.VERSIONER_API_KEY }}
@@ -115,7 +115,7 @@ jobs:
       - name: Deploy
         run: ./deploy.sh
 
-      - uses: versioner-io/versioner-github-action@v1
+      - uses: versioner-io/versioner-github-action@main
         with:
           api-key: ${{ secrets.VERSIONER_API_KEY }}
           product: my-service
@@ -131,7 +131,7 @@ jobs:
   id: deploy
   run: ./deploy.sh
 
-- uses: versioner-io/versioner-github-action@v1
+- uses: versioner-io/versioner-github-action@main
   if: always()
   with:
     api-key: ${{ secrets.VERSIONER_API_KEY }}
@@ -146,7 +146,7 @@ jobs:
 Allow deployments to proceed even if Versioner API is unavailable:
 
 ```yaml
-- uses: versioner-io/versioner-github-action@v1
+- uses: versioner-io/versioner-github-action@main
   with:
     api-key: ${{ secrets.VERSIONER_API_KEY }}
     product: my-service
@@ -177,7 +177,7 @@ For releases, use semantic versions instead of commit SHAs:
   id: version
   run: echo "version=$(cat VERSION)" >> $GITHUB_OUTPUT
 
-- uses: versioner-io/versioner-github-action@v1
+- uses: versioner-io/versioner-github-action@main
   with:
     version: ${{ steps.version.outputs.version }}
 ```
@@ -188,12 +188,12 @@ Track deployments to all environments, not just production:
 
 ```yaml
 # Staging
-- uses: versioner-io/versioner-github-action@v1
+- uses: versioner-io/versioner-github-action@main
   with:
     environment: staging
 
 # Production
-- uses: versioner-io/versioner-github-action@v1
+- uses: versioner-io/versioner-github-action@main
   with:
     environment: production
 ```
@@ -202,7 +202,7 @@ or better yet...
 
 ```yaml
 # Parameterized
-- uses: versioner-io/versioner-github-action@v1
+- uses: versioner-io/versioner-github-action@main
   with:
     environment: ${{ inputs.environment }}
 ```

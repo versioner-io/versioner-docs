@@ -29,7 +29,7 @@ You can submit deployment events from a variety of ways. ([Learn more...](../../
 
 ```yaml
 - name: Record Deployment Started in Versioner
-  uses: versioner-io/versioner-github-action@v1
+  uses: versioner-io/versioner-github-action@main
   with:
     api-key: ${{ secrets.VERSIONER_API_KEY }}
     product: my-service
@@ -39,7 +39,7 @@ You can submit deployment events from a variety of ways. ([Learn more...](../../
     environment: production
 
 - name: Record Deployment Completed in Versioner
-  uses: versioner-io/versioner-github-action@v1
+  uses: versioner-io/versioner-github-action@main
   with:
     api-key: ${{ secrets.VERSIONER_API_KEY }}
     product: my-service
