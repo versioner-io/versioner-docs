@@ -8,16 +8,20 @@ resource "aws_cloudfront_function" "url_rewrite" {
 function handler(event) {
     var request = event.request;
     var uri = request.uri;
-    
-    // Check if the URI ends with a slash
+
     if (uri.endsWith('/')) {
         request.uri += 'index.html';
+        return request;
     }
-    // Check if the URI has no file extension
-    else if (!uri.includes('.')) {
-        request.uri += '/index.html';
+
+    if (!uri.includes('.')) {
+        return {
+            statusCode: 301,
+            statusDescription: 'Moved Permanently',
+            headers: { location: { value: uri + '/' } }
+        };
     }
-    
+
     return request;
 }
 EOT
