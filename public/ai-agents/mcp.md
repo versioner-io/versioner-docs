@@ -2,21 +2,13 @@
 
 Versioner provides an MCP (Model Context Protocol) server that lets AI agents query your deployment state, check readiness before deploying, and prepare structured Deployment Requests as part of automated workflows.
 
-## What is MCP?
-
-MCP (Model Context Protocol) is a standardized protocol for AI agents to interact with external systems. The Versioner MCP server gives agents programmatic access to your deployments, rules, and governance—enabling smarter automation across your CI/CD pipelines.
-
 ## Availability
 
-| Tier | Read Tools | Advisory Preflight | Write Tools |
+| Tier | Read Tools :material-information-outline:{ title="Query deployment state, history, and governance rules" } | Advisory Preflight :material-information-outline:{ title="Evaluates whether a specific version can deploy to an environment right now" } | Write Tools :material-information-outline:{ title="Create and configure Deployment Requests — humans approve and trigger deployments in the UI" } |
 |------|----------|-------------------|-------------|
 | **Free** | ✓ | | |
 | **Protect** | ✓ | | |
 | **Enforce** | ✓ | ✓ | ✓ |
-
-- **Read tools** (Free+) query deployment state, history, and governance rules
-- **Advisory preflight** (Enforce+) evaluates whether a specific version can deploy to an environment right now
-- **Write tools** (Enforce+) let agents create and configure Deployment Requests (humans approve and trigger in the UI)
 
 ## Connection Setup
 
