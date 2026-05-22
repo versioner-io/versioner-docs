@@ -2,44 +2,40 @@
 
 **Versioner** is a deployment operations and governance layer that combines real-time environment state with the rules, approvals, and pre/post-deploy steps you define to decide whether a deployment is allowed to proceed. It works across the tools you already use, without asking you to consolidate or change your processes.
 
+<img src="assets/dashboard-screenshot.png" alt="Versioner dashboard showing the Environment State Matrix" class="screenshot" />
+
+<div class="homepage-ctas" markdown="1">
+[Get started →](getting-started/index.md){ .md-button .md-button--primary }
+[How it works](concepts/how-it-works.md){ .md-button }
+</div>
+
 ## Three Pillars of Deployment Governance
 
-```mermaid
-flowchart LR
-    V["Visibility (Observe)<br/>─────────────────<br/>Environment State Matrix<br/>Deployment History<br/><br/>Free"]
-    C["Control (Protect)<br/>─────────────────<br/>Deployment Requests<br/>Approval Gates<br/><br/>Protect"]
-    G["Governance (Enforce)<br/>─────────────────<br/>Deployment Rules<br/>Policy Enforcement<br/><br/>Enforce"]
+<div class="grid cards pillars-grid" markdown>
 
-    V --> C --> G
+-   :material-eye-outline:{ .lg .middle } **Observe**
 
-    style V fill:#115e59,stroke:#14b8a6,stroke-width:2px,color:#fff
-    style C fill:#0d9488,stroke:#14b8a6,stroke-width:2px,color:#fff
-    style G fill:#0f4c47,stroke:#14b8a6,stroke-width:3px,color:#fff
-```
+    ---
 
-**Observe** — See exactly what version of each product runs in each environment. Detect drift automatically.  
-**Protect** — Create Deployment Requests, route to the right approvers, track quality gates per version.  
-**Enforce** — Define org-wide policies: no-deploy windows, required sequences, approval gates, version requirements.
+    See exactly what version of each product runs in each environment. Detect drift automatically.
 
-## 🚀 Quick Start
+    *Free — available on all plans*
 
-1. **[Create an account](getting-started/quick-start.md#step-1-create-an-account-and-get-your-api-key)** — Sign up and get your API key
-2. **Choose your integration:**
-     - [Native Integrations](integrations/index.md) — GitHub Actions and more
-     - [CLI](cli/index.md) — any CI/CD system
-     - [REST API](api/index.md) — custom integrations
-3. **[Submit your first event](getting-started/quick-start.md#step-4-submit-your-first-event)** — Track your first deployment
+-   :material-shield-check-outline:{ .lg .middle } **Protect**
 
-## Core Concepts
+    ---
 
-- **[Environment State Matrix](concepts/governance/environment-state-matrix.md)** — See what's deployed where at a glance
-- **[Deployment Requests](concepts/governance/deployment-requests.md)** — A governance envelope for an individual deployment event
-- **[Deployment Rules](concepts/governance/deployment-rules.md)** — Org-wide policies that enforce governance across deployments
-- **[Products](concepts/catalog/products.md)** — Deployable software components
-- **[Versions](concepts/catalog/versions.md)** — A build artifact or git ref that's ready to deploy
-- **[Environments](concepts/catalog/environments.md)** — Deployment targets (dev, staging, production)
+    Create Deployment Requests, route to the right approvers, and track quality gates per version.
 
-## 🆘 Support
+    *Protect tier and above*
 
-- **Contact:** support@versioner.io
-- **API Status:** [status.versioner.io](https://status.versioner.io) _(coming soon)_
+-   :material-gavel:{ .lg .middle } **Enforce**
+
+    ---
+
+    Define org-wide policies: no-deploy windows, required sequences, approval gates, version requirements.
+
+    *Enforce tier*
+
+</div>
+

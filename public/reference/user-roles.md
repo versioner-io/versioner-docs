@@ -67,7 +67,7 @@ Deployment request approval slots are assigned an **approval type**. Each type c
 | Manage billing | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ |
 
 !!! note "Deployment Request Approvals"
-    Approval slots in a deployment request are fulfilled based on their assigned type, not a blanket "approve DR" permission. A user can only fulfill a slot if their role matches that slot's approval type. See [Deployment Requests](../governance/deployment-requests.md) for details.
+    Approval slots in a deployment request are fulfilled based on their assigned type, not a blanket "approve DR" permission. A user can only fulfill a slot if their role matches that slot's approval type. See [Deployment Requests](../concepts/governance/deployment-requests.md) for details.
 
 !!! note "Fulfilling Approval Slots"
     The "Fulfill deployment request approval slots" row indicates the role *can* fulfill slots — but only for the approval types mapped to their role. For example, a QA user can fulfill QA and Performance slots but not Security or UAT slots.
@@ -96,7 +96,7 @@ Users cannot change their own role. Contact an account administrator to request 
 
 ## Related Concepts
 
-- **[Products](../catalog/products.md)** - What users can deploy
-- **[Environments](../catalog/environments.md)** - Where users can deploy
-- **[Deployment Requests](../governance/deployment-requests.md)** - Approval workflows that use roles
-- **[Notifications](notifications.md)** - Email notifications for approvals
+- **[Products](../concepts/catalog/products.md)** - What users can deploy
+- **[Environments](../concepts/catalog/environments.md)** - Where users can deploy
+- **[Deployment Requests](../concepts/governance/deployment-requests.md)** - Approval workflows that use roles
+- **[Notifications](../guides/notifications.md)** - Email notifications for approvals

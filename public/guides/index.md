@@ -1,13 +1,17 @@
 # Guides
 
-Use-case-driven guides for tracking deployments that don't fit neatly into a CI/CD pipeline step. Each guide covers what to track, which version signal makes sense for your setup, and how to wire it in.
+Task-oriented guides for configuring and extending Versioner. Each guide covers a specific workflow end-to-end.
 
 ## Available Guides
+
+### [Setting Up Notifications](notifications.md)
+
+Configure Slack webhooks for deployment and build events, and understand how DR approval emails work.
+
+### [Configuring Deployment Buttons](deployment-buttons.md)
+
+Set up one-click shortcuts to your deployment tools using variables and URL templates, surfaced in the dashboard and Slack.
 
 ### [Tracking Terraform / IaC Versions](terraform.md)
 
 Track Terraform applies and Terragrunt runs alongside your application deployments. Versioner fills the gap Terraform doesn't: which commit produced the current infrastructure state, visible in the same environment grid as your app versions.
-
-## Coming Soon
-
-- **Using Versioner with AI Agents** — patterns for querying deployment state, running preflight checks, and acting on Versioner data in agentic workflows

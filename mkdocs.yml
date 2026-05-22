@@ -12,6 +12,7 @@ site_dir: site
 # Theme configuration
 theme:
   name: material
+  custom_dir: overrides
   logo: assets/versioner-logo.png
   favicon: assets/versioner-logo.png
   palette:
@@ -43,15 +44,19 @@ extra_css:
 # Navigation structure
 nav:
   - Home: index.md
-  - Getting Started:
-      - Quick Start: getting-started/quick-start.md
-      - How It Works: getting-started/how-it-works.md
+  - Getting Started: getting-started/index.md
+  - Guides:
+      - Overview: guides/index.md
+      - Setting Up Notifications: guides/notifications.md
+      - Configuring Deployment Buttons: guides/deployment-buttons.md
+      - Tracking Terraform / IaC Versions: guides/terraform.md
   - Integrations:
       - Overview: integrations/index.md
       - Troubleshooting: integrations/troubleshooting.md
       - Native Integrations:
-          - GitHub Action: integrations/github-action.md
-          - Vercel: integrations/vercel.md
+          - Overview: integrations/native/index.md
+          - GitHub Action: integrations/native/github-action.md
+          - Vercel: integrations/native/vercel.md
       - CLI:
           - Overview: cli/index.md
           - Installation: cli/installation.md
@@ -64,34 +69,29 @@ nav:
           - Azure DevOps: cli/azure-devops.md
           - Travis CI: cli/travis-ci.md
           - Rundeck: cli/rundeck.md
-      - API:
+      - REST API:
           - Overview: api/index.md
           - Authentication: api/authentication.md
           - Event Tracking: api/event-tracking.md
-          - Event Types: api/event-types.md
-          - Interactive Docs: api/interactive-docs.md
-          - Response Codes: api/response-codes.md
-      - MCP:
-          - MCP Server: integrations/mcp.md
-  - Guides:
-      - Overview: guides/index.md
-      - Tracking Terraform / IaC Versions: guides/terraform.md
+  - AI Agents:
+      - MCP Server: ai-agents/mcp.md
   - Concepts:
       - Overview: concepts/index.md
-      - Catalog:
-          - Products: concepts/catalog/products.md
-          - Versions: concepts/catalog/versions.md
-          - Environments: concepts/catalog/environments.md
-          - Deployments: concepts/catalog/deployments.md
+      - How It Works: concepts/how-it-works.md
+      - Products: concepts/catalog/products.md
+      - Versions: concepts/catalog/versions.md
+      - Environments: concepts/catalog/environments.md
+      - Deployments: concepts/catalog/deployments.md
       - Governance:
           - Environment State Matrix: concepts/governance/environment-state-matrix.md
           - Deployment Requests: concepts/governance/deployment-requests.md
           - Deployment Rules: concepts/governance/deployment-rules.md
-      - Configuration:
-          - Variables: concepts/configuration/variables.md
-          - User Roles: concepts/configuration/user-roles.md
-          - Notifications: concepts/configuration/notifications.md
-          - Deployment Buttons: concepts/configuration/deployment-buttons.md
+  - Reference:
+      - Variables: reference/variables.md
+      - User Roles: reference/user-roles.md
+      - API Event Types: reference/event-types.md
+      - API Response Codes: reference/response-codes.md
+      - API Interactive Docs: reference/interactive-docs.md
 
 # Markdown extensions
 markdown_extensions:
@@ -150,9 +150,20 @@ plugins:
       type: timeago
   - redirects:
       redirect_maps:
-        getting-started/index.md: getting-started/quick-start.md
-        agents/index.md: integrations/mcp.md
-        agents/mcp.md: integrations/mcp.md
+        getting-started/quick-start.md: getting-started/index.md
+        getting-started/how-it-works.md: concepts/how-it-works.md
+        integrations/github-action.md: integrations/native/github-action.md
+        integrations/vercel.md: integrations/native/vercel.md
+        agents/index.md: ai-agents/mcp.md
+        agents/mcp.md: ai-agents/mcp.md
+        integrations/mcp.md: ai-agents/mcp.md
+        concepts/configuration/notifications.md: guides/notifications.md
+        concepts/configuration/deployment-buttons.md: guides/deployment-buttons.md
+        concepts/configuration/variables.md: reference/variables.md
+        concepts/configuration/user-roles.md: reference/user-roles.md
+        api/event-types.md: reference/event-types.md
+        api/interactive-docs.md: reference/interactive-docs.md
+        api/response-codes.md: reference/response-codes.md
 
 # Extra configuration
 extra:

@@ -16,8 +16,8 @@ On Pro/Enterprise, both parts work together: **preflight → deploy → recorded
 
 ## Prerequisites
 
-- A [Versioner API key](../api/authentication.md)
-- The [Versioner CLI](../cli/installation.md) available in your build environment
+- A [Versioner API key](../../api/authentication.md)
+- The [Versioner CLI](../../cli/installation.md) available in your build environment
 
 ## Step 1: Add the pre-deployment build script (all tiers)
 
@@ -38,7 +38,7 @@ Add your API key as a Vercel environment variable:
 1. In Vercel: **Project → Settings → Environment Variables**
 2. Add `VERSIONER_API_KEY` with your API key value
 
-When `--status started` is posted, Versioner evaluates your [deployment rules](../concepts/governance/deployment-rules.md). If an enforced rule fails, the CLI exits non-zero and Vercel cancels the build — the deployment never starts.
+When `--status started` is posted, Versioner evaluates your [deployment rules](../../concepts/governance/deployment-rules.md). If an enforced rule fails, the CLI exits non-zero and Vercel cancels the build — the deployment never starts.
 
 !!! warning "Hobby tier: deployments stay in \"Started\" state"
     On Hobby (Free), Vercel does not support outbound webhooks. The build script enforces preflight checks and creates a deployment record, but without a completion event the deployment remains permanently in **Started** state in Versioner. See [Hobby tier workaround](#hobby-tier-workaround) if you need full lifecycle tracking.
@@ -94,4 +94,4 @@ This gives you full lifecycle visibility without requiring the Pro/Enterprise ou
 
 ## Troubleshooting
 
-See the [Troubleshooting guide](troubleshooting.md) for help with common API errors including 401, 422, 423, and 428 responses.
+See the [Troubleshooting guide](../troubleshooting.md) for help with common API errors including 401, 422, 423, and 428 responses.

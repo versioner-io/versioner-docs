@@ -41,7 +41,7 @@ Manage your products from the **Products** page. From there you can view all pro
 !!! warning "Deleting Products"
     Deleting a product will also delete all associated versions and deployments. This action cannot be undone.
 
-For API-based product management, see the [Interactive API Docs](../../api/interactive-docs.md).
+For API-based product management, see the [Interactive API Docs](../../reference/interactive-docs.md).
 
 ## Product Relationships
 

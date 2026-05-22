@@ -41,6 +41,6 @@ Download the complete [OpenAPI 3.0 specification](https://api.versioner.io/opena
 ## Next Steps
 
 - **Try the API:** [api.versioner.io/docs](https://api.versioner.io/docs)
-- **Event tracking:** [Event Tracking Guide](event-tracking.md)
-- **Authentication:** [Authentication Guide](authentication.md)
+- **Event tracking:** [Event Tracking Guide](../api/event-tracking.md)
+- **Authentication:** [Authentication Guide](../api/authentication.md)
 - **Error handling:** [Response Codes](response-codes.md)

@@ -70,9 +70,9 @@ For complete API documentation, see:
 
 - **[Authentication](../api/authentication.md)** - API key management
 - **[Event Tracking](../api/event-tracking.md)** - Submit deployment and build events
-- **[Interactive Docs](../api/interactive-docs.md)** - Explore all endpoints
-- **[Event Types](../api/event-types.md)** - Deployment and version events
-- **[Response Codes](../api/response-codes.md)** - Error handling
+- **[Interactive Docs](../reference/interactive-docs.md)** - Explore all endpoints
+- **[Event Types](../reference/event-types.md)** - Deployment and version events
+- **[Response Codes](../reference/response-codes.md)** - Error handling
 
 ## Interactive API Documentation
 
@@ -90,5 +90,5 @@ Visit the interactive API documentation at [api.versioner.io/docs](https://api.v
 ## Next Steps
 
 - Start with [Event Tracking](../api/event-tracking.md)
-- Learn about [Event Types](../api/event-types.md)
-- Explore [Interactive Docs](../api/interactive-docs.md)
+- Learn about [Event Types](../reference/event-types.md)
+- Explore [Interactive Docs](../reference/interactive-docs.md)

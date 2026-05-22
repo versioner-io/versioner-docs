@@ -25,7 +25,7 @@ Deployments can progress through several states:
 
 ## Deployment Events
 
-You can submit deployment events from a variety of ways. ([Learn more...](../../integrations)) The example shown here uses the [GitHub Action](../../integrations/github-action.md) native integration, but other options exist as well.
+You can submit deployment events from a variety of ways. ([Learn more...](../../integrations)) The example shown here uses the [GitHub Action](../../integrations/native/github-action.md) native integration, but other options exist as well.
 
 ```yaml
 - name: Record Deployment Started in Versioner
@@ -49,7 +49,7 @@ You can submit deployment events from a variety of ways. ([Learn more...](../../
     environment: production
 ```
 
-See [Event Types](../../api/event-types.md) for the full list of status values and payload options.
+See [Event Types](../../reference/event-types.md) for the full list of status values and payload options.
 
 ## Deployment Metadata
 
@@ -77,4 +77,4 @@ Deployments can include additional metadata:
 
 - **[Versions](versions.md)** - What gets deployed
 - **[Environments](environments.md)** - Where deployments go
-- **[Notifications](../configuration/notifications.md)** - Get alerted about deployments
+- **[Notifications](../../guides/notifications.md)** - Get alerted about deployments

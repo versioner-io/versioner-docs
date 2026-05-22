@@ -37,7 +37,7 @@ Event-based notifications to Slack channels. Configure different events to go to
 | `version.failed` | Build fails |
 | `version.aborted` | Build cancelled |
 
-See [Event Types](../../api/event-types.md) for details.
+See [Event Types](../reference/event-types.md) for details.
 
 ## Common Configurations
 
@@ -130,5 +130,5 @@ Unlike Slack webhooks (which can be noisy), DR approval emails are **selective**
 
 ## Related Concepts
 
-- **[Deployments](../catalog/deployments.md)** - What triggers notifications
-- **[Event Types](../../api/event-types.md)** - All available event types
+- **[Deployments](../concepts/catalog/deployments.md)** - What triggers notifications
+- **[Event Types](../reference/event-types.md)** - All available event types

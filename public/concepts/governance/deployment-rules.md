@@ -180,7 +180,7 @@ All rules pass → Deployment allowed
 
 ## Integration with CI/CD
 
-When a rule blocks a deployment, the Versioner API returns a **4xx** error response. The exact code varies by rule type and failure reason — see [API Response Codes](../../api/response-codes.md) for the full reference. How that surfaces in your pipeline depends on how you're integrating.
+When a rule blocks a deployment, the Versioner API returns a **4xx** error response. The exact code varies by rule type and failure reason — see [API Response Codes](../../reference/response-codes.md) for the full reference. How that surfaces in your pipeline depends on how you're integrating.
 
 **CLI:**
 
@@ -208,7 +208,7 @@ versioner track deployment ... || {
 
 **GitHub Actions:**
 
-The action handles the API response for you — if a rule blocks the deployment, the step fails and the blocking rule name appears in the workflow log. You don't need to inspect status codes or exit codes directly. See [GitHub Action](../../integrations/github-action.md) for full configuration options.
+The action handles the API response for you — if a rule blocks the deployment, the step fails and the blocking rule name appears in the workflow log. You don't need to inspect status codes or exit codes directly. See [GitHub Action](../../integrations/native/github-action.md) for full configuration options.
 
 ```yaml
 - uses: versioner-io/versioner-github-action@main
@@ -271,6 +271,6 @@ Quarterly, review your rules:
 ## Related Concepts
 
 - **[Deployment Requests](deployment-requests.md)** — Manual governed deployments
-- **[User Roles](../configuration/user-roles.md)** — Roles determine who can create and manage rules
+- **[User Roles](../../reference/user-roles.md)** — Roles determine who can create and manage rules
 - **[Environment State Matrix](environment-state-matrix.md)** — See current state before rules evaluate
 - **[Environments](../catalog/environments.md)** — Rules target specific environments

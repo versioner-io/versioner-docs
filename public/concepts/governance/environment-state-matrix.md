@@ -48,4 +48,4 @@ Click on any product name to open its detail page, where you can:
 - **[Environments](../catalog/environments.md)** - Deployment targets shown as columns
 - **[Versions](../catalog/versions.md)** - Version numbers displayed in cells
 - **[Deployments](../catalog/deployments.md)** - Deployment events populate the matrix
-- **[Notifications](../configuration/notifications.md)** - Get alerted when matrix changes
+- **[Notifications](../../guides/notifications.md)** - Get alerted when matrix changes

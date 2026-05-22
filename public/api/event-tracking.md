@@ -299,7 +299,7 @@ Version immutability violation:
 }
 ```
 
-See [Response Codes](response-codes.md) for complete reference.
+See [Response Codes](../reference/response-codes.md) for complete reference.
 
 ## Best Practices
 
@@ -372,7 +372,7 @@ Use `extra_metadata` for custom tracking:
 
 ## Next Steps
 
-- **Easier integration:** Use the [CLI](../cli/index.md) or [GitHub Action](../integrations/github-action.md)
-- **Event types:** See [Event Types](event-types.md) for all status values
-- **Error handling:** Review [Response Codes](response-codes.md)
-- **Notifications:** Set up [Slack notifications](../concepts/configuration/notifications.md)
+- **Easier integration:** Use the [CLI](../cli/index.md) or [GitHub Action](../integrations/native/github-action.md)
+- **Event types:** See [Event Types](../reference/event-types.md) for all status values
+- **Error handling:** Review [Response Codes](../reference/response-codes.md)
+- **Notifications:** Set up [Slack notifications](../guides/notifications.md)

@@ -105,7 +105,7 @@ fi
 
 ### track build
 
-Tracking builds registers a **version** in Versioner. Versions are the unit Versioner uses for deployment tracking and notifications. When a build completes, Versioner can notify your team with the version that's ready to deploy. If you've set up [Deployment Buttons](../concepts/configuration/deployment-buttons.md), that notification becomes actionable: one click deploys directly from the notification or the dashboard.
+Tracking builds registers a **version** in Versioner. Versions are the unit Versioner uses for deployment tracking and notifications. When a build completes, Versioner can notify your team with the version that's ready to deploy. If you've set up [Deployment Buttons](../guides/deployment-buttons.md), that notification becomes actionable: one click deploys directly from the notification or the dashboard.
 
 ```bash
 versioner track build [OPTIONS]

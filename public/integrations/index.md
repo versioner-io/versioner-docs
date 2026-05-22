@@ -17,13 +17,9 @@ Choose the method that fits your stack:
 
 ### Native Integrations
 
-Pre-built plugins for specific CI/CD platforms. Minimal configuration, automatic metadata extraction.
+Platform-specific plugins with minimal configuration and automatic metadata extraction.
 
-- [GitHub Action](github-action.md) ✅ — Available now
-- [Vercel](vercel.md) ✅ — Available now
-- Bitbucket Pipelines — Coming soon
-- GitLab CI — Coming soon
-- Jenkins — Coming soon
+[Native Integrations →](native/index.md)
 
 ### CLI
 
@@ -36,14 +32,6 @@ A universal command-line tool that works with any system. Drop it into any pipel
 Direct HTTP access for custom integrations, internal deployment platforms, or when you want full control over exactly what gets sent.
 
 [API Documentation →](../api/index.md)
-
-## AI Agent Access
-
-### MCP Server
-
-Connect AI assistants (Claude, Cursor, and others) to live Versioner data via the Model Context Protocol. Query deployment state, check environment status, and run advisory preflight checks — all from within your AI agent workflow.
-
-[MCP Server →](mcp.md)
 
 ## Request an Integration
 

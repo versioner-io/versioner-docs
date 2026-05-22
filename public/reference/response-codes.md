@@ -46,7 +46,7 @@ HTTP status codes and error responses used by the Versioner API.
 - Check Authorization header format: `Bearer sk_...`
 - Ensure API key hasn't been revoked
 
-See [Authentication](authentication.md) for details.
+See [Authentication](../api/authentication.md) for details.
 
 ### 403 Forbidden
 
@@ -351,6 +351,6 @@ except requests.exceptions.HTTPError as e:
 
 ## Next Steps
 
-- Review [Authentication](authentication.md)
-- Explore [Event Tracking API](event-tracking.md)
+- Review [Authentication](../api/authentication.md)
+- Explore [Event Tracking API](../api/event-tracking.md)
 - Learn about [Event Types](event-types.md)

@@ -1,6 +1,6 @@
 # Variables
 
-Variables let you define values once and reference them in [Deployment Button](deployment-buttons.md) URL templates. They keep templates clean and avoid repeating common values like tool base URLs or job IDs across products.
+Variables let you define values once and reference them in [Deployment Button](../guides/deployment-buttons.md) URL templates. They keep templates clean and avoid repeating common values like tool base URLs or job IDs across products.
 
 ## Scopes
 
@@ -46,11 +46,11 @@ Variable names must be lowercase letters, numbers, and underscores only — no s
 
 ## Managing Variables
 
-**Organization variables:** Settings → Organization → Variables
+**Organization variables:** Settings → Variables
 
 **Product variables:** Manage → Products → [Product] → Variables
 
-Both support add, edit, and delete. Variables can also be managed via the [API](../../api/index.md).
+Both support add, edit, and delete. Variables can also be managed via the [API](../api/index.md).
 
 !!! warning "Sensitive data"
     Variables are stored in plain text. Do not store passwords or API tokens.
@@ -68,6 +68,6 @@ Both support add, edit, and delete. Variables can also be managed via the [API](
 
 ## Related
 
-- [Deployment Buttons](deployment-buttons.md) — how variables are used in templates
-- [Products](../catalog/products.md) — product-level variable scoping
-- [Environments](../catalog/environments.md) — system variables include environment context
+- [Deployment Buttons](../guides/deployment-buttons.md) — how variables are used in templates
+- [Products](../concepts/catalog/products.md) — product-level variable scoping
+- [Environments](../concepts/catalog/environments.md) — system variables include environment context

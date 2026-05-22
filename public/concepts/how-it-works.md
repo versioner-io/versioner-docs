@@ -23,7 +23,7 @@ When the build finishes, send `completed` or `failed`. On success, Versioner reg
 
 From that notification (or from the Versioner dashboard), someone can:
 
-- Click a [Deployment Button](../concepts/configuration/deployment-buttons.md) to trigger your deployment system directly
+- Click a [Deployment Button](../guides/deployment-buttons.md) to trigger your deployment system directly
 - Copy the version number and plug it into your CI/CD system manually
 
 **Skipping the build phase is fine.** If you only send deployment events, Versioner creates the version on the fly. You just won't get the "ready to deploy" Slack notification.
@@ -99,7 +99,7 @@ sequenceDiagram
 
 ## Next Steps
 
-- [Quick Start](quick-start.md) — send your first event in minutes
-- [Deployment Requests](../concepts/governance/deployment-requests.md) — approval gates and pre-deploy steps
-- [Deployment Rules](../concepts/governance/deployment-rules.md) — automated policy enforcement
+- [Quick Start](../getting-started/index.md) — send your first event in minutes
+- [Deployment Requests](governance/deployment-requests.md) — approval gates and pre-deploy steps
+- [Deployment Rules](governance/deployment-rules.md) — automated policy enforcement
 - [CI/CD Integrations](../integrations/index.md) — choose your integration method

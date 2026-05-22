@@ -53,7 +53,7 @@ hotfix-auth-bug
 
 ## Version Events
 
-Submit version events to track builds. The recommended approach is to use a native integration — the [Versioner GitHub Action](../../integrations/github-action.md) handles this automatically as part of your workflow:
+Submit version events to track builds. The recommended approach is to use a native integration — the [Versioner GitHub Action](../../integrations/native/github-action.md) handles this automatically as part of your workflow:
 
 ```yaml
 - name: Record Build Completed in Versioner

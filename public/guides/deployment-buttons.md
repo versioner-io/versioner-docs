@@ -48,13 +48,13 @@ For GitHub Actions, the button takes you directly to the right workflow, which s
 
 Deployment buttons use three components:
 
-1. **[Variables](variables.md)** - Configuration values (URLs, IDs, etc.)
+1. **[Variables](../reference/variables.md)** - Configuration values (URLs, IDs, etc.)
 2. **Templates** - URL patterns with variable placeholders
 3. **Environments** - Where the deployment buttons appear
 
 ### 1. Variables
 
-Variables store reusable configuration values. See the [Variables](variables.md) guide for full details.
+Variables store reusable configuration values. See the [Variables](../reference/variables.md) guide for full details.
 
 **Example variables:**
 
@@ -101,7 +101,7 @@ Each template is associated with one or more environments (dev, staging, product
 
 ### Step 1: Define Variables
 
-**Organization variables** (Settings → Organization → Variables):
+**Organization variables** (Settings → Variables):
 
 ```
 jenkins_base_url = "https://jenkins.mycompany.com"
@@ -288,7 +288,7 @@ Deployment buttons provide **navigation**, not **authorization**. Users still ne
 
 ## Related Concepts
 
-- **[Variables](variables.md)** - Configuration system powering deployment buttons
+- **[Variables](../reference/variables.md)** - Configuration system powering deployment buttons
 - **[Notifications](notifications.md)** - Slack notifications include deployment buttons
-- **[Deployments](../catalog/deployments.md)** - Track deployments triggered via buttons
-- **[Environments](../catalog/environments.md)** - Deployment buttons are scoped to environments
+- **[Deployments](../concepts/catalog/deployments.md)** - Track deployments triggered via buttons
+- **[Environments](../concepts/catalog/environments.md)** - Deployment buttons are scoped to environments

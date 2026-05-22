@@ -11,6 +11,7 @@ MCP (Model Context Protocol) is a standardized protocol for AI agents to interac
 | Tier | Read Tools | Advisory Preflight | Write Tools |
 |------|----------|-------------------|-------------|
 | **Free** | ✓ | | |
+| **Protect** | ✓ | | |
 | **Enforce** | ✓ | ✓ | ✓ |
 
 - **Read tools** (Free+) query deployment state, history, and governance rules

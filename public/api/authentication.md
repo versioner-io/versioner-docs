@@ -18,7 +18,7 @@ API keys authenticate **event tracking** from CI/CD systems:
 - `POST /build-events/` — track builds
 - `POST /deployment-events/` — track deployments
 
-Create and manage API keys under **Settings → Organization → API Keys** in the Versioner app.
+Create and manage API keys under **Settings → Integrations → API Keys** in the Versioner app.
 
 ### Usage
 
@@ -95,10 +95,10 @@ You can create multiple API keys per account — useful for key rotation, separa
 
 ## Personal Access Tokens (PATs)
 
-PATs are for programmatic access. They're user-scoped and designed for agents, scripts, and integrations that work with Versioner data. The [MCP server](../integrations/mcp.md) uses PATs for this purpose.
+PATs are for programmatic access. They're user-scoped and designed for agents, scripts, and integrations that work with Versioner data. The [MCP server](../ai-agents/mcp.md) uses PATs for this purpose.
 
 !!! info "Expanding scope"
-    PAT support currently covers read operations. Write access via PATs is planned — check the [interactive docs](interactive-docs.md) for the current endpoint list.
+    PAT support currently covers read operations. Write access via PATs is planned — check the [interactive docs](../reference/interactive-docs.md) for the current endpoint list.
 
 Create and manage PATs under **Settings → Developer** in the Versioner app.
 
@@ -194,6 +194,6 @@ Key is valid but lacks permission for the requested resource.
 ## Next Steps
 
 - [Event Tracking](event-tracking.md) — submit deployment and build events
-- [Event Types](event-types.md) — status values and payload details
-- [Response Codes](response-codes.md) — error handling
-- [Interactive Docs](interactive-docs.md) — explore all endpoints with current auth requirements
+- [Event Types](../reference/event-types.md) — status values and payload details
+- [Response Codes](../reference/response-codes.md) — error handling
+- [Interactive Docs](../reference/interactive-docs.md) — explore all endpoints with current auth requirements

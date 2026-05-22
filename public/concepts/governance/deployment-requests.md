@@ -186,7 +186,7 @@ notification-service 2.1.0     ✅    ✅     ✅       ✅
 ## Related Concepts
 
 - **[Deployment Rules](deployment-rules.md)** - Automated enforcement of deployment policy
-- **[User Roles](../configuration/user-roles.md)** - Roles determine who can approve which deployment types
+- **[User Roles](../../reference/user-roles.md)** - Roles determine who can approve which deployment types
 - **[Environment State Matrix](environment-state-matrix.md)** - See current state before creating a DR
 - **[Products](../catalog/products.md)** - Products are deployed via DRs
 - **[Versions](../catalog/versions.md)** - Versions are what DRs deploy

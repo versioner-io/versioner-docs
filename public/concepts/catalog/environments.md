@@ -109,4 +109,4 @@ Let Versioner auto-detect types when possible:
 
 - **[Deployments](deployments.md)** - Deploying to environments
 - **[Versions](versions.md)** - What gets deployed
-- **[Notifications](../configuration/notifications.md)** - Environment-specific alerts
+- **[Notifications](../../guides/notifications.md)** - Environment-specific alerts
