@@ -190,25 +190,7 @@ When a secret is configured, Versioner signs the raw compact-JSON body and adds 
 
 ## DR Approval Emails
 
-When a Deployment Request moves to **In Progress**, users whose role matches an approval slot receive an action-oriented approval email.
-
-!!! info "Govern tier"
-    DR Approval Emails are part of Deployment Requests, available on Govern tier and above.
-
-### How it works
-
-1. **DR activated** — Deployment Request moves to In Progress, triggering approval notifications
-2. **Approvers notified** — Users whose role matches an approval slot receive an email with a summary of what needs approval (product, version, environment) and a direct link to the DR
-3. **User acts** — Approver clicks the link, reviews in Versioner, approves or rejects
-4. **Creator notified** — DR creator receives an email with the outcome
-
-### No configuration required
-
-DR Approval Emails are automatic — no setup in Settings → Notifications. They fire based on approval slots defined on the DR itself.
-
-- Only sent when your role matches an approval slot
-- One email per DR requiring your approval
-- No opt-in or opt-out
+DR approval emails are automatic — there's nothing to configure here. When a Deployment Request moves to In Progress, Versioner emails users whose role matches an approval slot. See [Deployment Requests](../concepts/governance/deployment-requests.md#approval-workflow) for how the approval flow works.
 
 ---
 
