@@ -14,6 +14,7 @@ Track the lifecycle of deployments to environments.
 | `deployment.started` | Deployment begins (in progress) |
 | `deployment.completed` | Deployment succeeds |
 | `deployment.failed` | Deployment fails with error |
+| `deployment.preflight_failed` | Deployment blocked by a preflight rule check |
 | `deployment.aborted` | Deployment cancelled/interrupted |
 
 ### Build Events
