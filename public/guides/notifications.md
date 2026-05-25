@@ -8,13 +8,10 @@ Stay informed about your deployments through Versioner's notification channels. 
 |---------|---------|---------|
 | **Slack** | Deployment and build events | Team alerting in Slack |
 | **Email** | Deployment and build events | Teams without Slack, or distribution lists |
-| **Webhook** | Deployment and build events | DORA dashboards, incident tools, custom automation |
+| **Webhook** | Deployment, build, and governance events | DORA dashboards, incident tools, agentic pipelines, custom automation |
 | **DR Approval Emails** | Deployment Request approval flow | Action-oriented approval notifications |
 
-Slack, Email, and Webhook all fire on the same deployment and build event types. DR Approval Emails are a separate system tied to the Deployment Request governance flow.
-
-!!! note "Governance-plane events coming soon"
-    DR lifecycle events (`dr.approved`, `dr.activated`, etc.) and rule enforcement events (`rule.blocked`) will be available as webhook events in a future release, enabling downstream automation that hooks into the approval flow.
+Slack and Email fire on deployment and build events. Webhook additionally covers DR lifecycle and version approval events — governance-plane events suited for downstream automation rather than person-facing alerts. DR Approval Emails are a separate system tied to the Deployment Request governance flow.
 
 ---
 
@@ -74,7 +71,7 @@ Email content includes: product name, environment, status, deployer, timestamp, 
 
 ## Webhook
 
-Outbound webhook that fires a JSON `POST` to your endpoint on deployment and build events. Use this to feed DORA dashboards, incident tools, audit systems, or custom workflows.
+Outbound webhook that fires a JSON `POST` to your endpoint on deployment, build, and governance events. Use this to feed DORA dashboards, incident tools, audit systems, or custom workflows.
 
 ### Setup
 
@@ -93,7 +90,26 @@ X-Versioner-Event: <event_type>
 X-Versioner-Signature: sha256=<hex>   # only if HMAC secret configured
 ```
 
-### Payload reference
+### CI/CD events
+
+Deployment and build events — use these for DORA metrics, incident tooling, and deployment tracking.
+
+#### Event types
+
+| Event | Description |
+|-------|-------------|
+| `deployment.pending` | Deployment queued |
+| `deployment.started` | Deployment in progress |
+| `deployment.completed` | Deployment succeeded |
+| `deployment.failed` | Deployment failed |
+| `deployment.aborted` | Deployment cancelled |
+| `build.pending` | Build queued |
+| `build.started` | Build in progress |
+| `build.completed` | Build succeeded |
+| `build.failed` | Build failed |
+| `build.aborted` | Build cancelled |
+
+#### Payload reference
 
 | Field | Type | Nullable | Description |
 |-------|------|----------|-------------|
@@ -110,7 +126,7 @@ X-Versioner-Signature: sha256=<hex>   # only if HMAC secret configured
 | `preflight_status` | string | Yes | `passed`, `failed`, `skipped`, or null |
 | `source_url` | string | Yes | Link to deployment in Versioner console |
 
-### `is_successful` by event type
+#### `is_successful` by event type
 
 `is_successful` is only set for terminal deployment states. Non-terminal events and all build events receive `null`.
 
@@ -135,7 +151,7 @@ X-Versioner-Signature: sha256=<hex>   # only if HMAC secret configured
 
     Subscribe only to `deployment.completed` and `deployment.failed` events for the cleanest DORA feed.
 
-### Example payload
+#### Example payload
 
 ```json
 {
@@ -151,6 +167,108 @@ X-Versioner-Signature: sha256=<hex>   # only if HMAC secret configured
   "commit_sha": "a3f9c2d1e4b5...",
   "preflight_status": "passed",
   "source_url": "https://app.versioner.io/manage/deployments?view=ac37da84-0891-48ae-9011-6500665804ee"
+}
+```
+
+### DR lifecycle and approvals
+
+DR lifecycle and version approval events are delivered via outbound webhook only — not Slack or email. Use these to trigger pipelines, update incident tools, or drive agentic workflows that react to the state of a deployment or approval.
+
+#### Event types
+
+| Event | Fires when |
+|-------|-----------|
+| `dr.created` | A Deployment Request is created (by a human or agent) |
+| `dr.activated` | A DR moves to In Progress — approval flow begins |
+| `dr.deactivated` | A DR is reverted to draft |
+| `dr.approved` | An approval slot is filled — fires once per slot, not once when all approved |
+| `dr.rejected` | An approval slot is explicitly denied |
+| `dr.completed` | A DR is marked complete |
+| `dr.cancelled` | A DR is cancelled |
+| `version.approved` | A quality sign-off is recorded on a version, independent of any DR |
+
+#### DR payload reference
+
+| Field | Type | Nullable | Description |
+|-------|------|----------|-------------|
+| `event_type` | string | No | One of the `dr.*` event types above |
+| `occurred_at` | string | No | ISO 8601 timestamp (UTC) |
+| `dr_id` | string | No | Deployment Request UUID |
+| `dr_name` | string | No | DR name (e.g. `"Q4 2025 Release"`) |
+| `dr_url` | string | No | Link to the DR in the Versioner console |
+| `status` | string | No | DR status at time of event |
+| `environment_names` | array | No | Target environment names |
+| `actor` | string | Yes | Name of the user who took the action |
+| `approval_type` | string | Yes | Approval type (`qa`, `security`, etc.) — present on `dr.approved` / `dr.rejected` |
+| `approver_role` | string | Yes | Role of the approver — present on `dr.approved` / `dr.rejected` |
+| `slot_status` | string | Yes | `"approved"` or `"rejected"` — present on `dr.approved` / `dr.rejected` |
+| `comments` | string | Yes | Reviewer comments — present on `dr.approved` / `dr.rejected` if provided |
+
+#### `version.approved` payload reference
+
+| Field | Type | Nullable | Description |
+|-------|------|----------|-------------|
+| `event_type` | string | No | `"version.approved"` |
+| `occurred_at` | string | No | ISO 8601 timestamp (UTC) |
+| `version_id` | string | No | Version UUID |
+| `product_name` | string | No | Product name |
+| `version` | string | No | Version string (e.g. `"1.2.6"`) |
+| `approval_type` | string | No | Approval type (`qa`, `security`, etc.) |
+| `approver_role` | string | No | Role of the approver |
+| `environment_name` | string | Yes | Environment the sign-off was scoped to, if any |
+| `comments` | string | Yes | Approver comments |
+| `actor` | string | Yes | Name of the approver |
+
+#### Example payloads
+
+`dr.activated`:
+
+```json
+{
+  "event_type": "dr.activated",
+  "occurred_at": "2026-05-25T09:14:33.201045+00:00",
+  "dr_id": "7f3a1b2c-4d5e-6f7a-8b9c-0d1e2f3a4b5c",
+  "dr_name": "Q4 2025 Release",
+  "dr_url": "https://app.versioner.io/deployment-requests/7f3a1b2c-4d5e-6f7a-8b9c-0d1e2f3a4b5c",
+  "status": "in_progress",
+  "environment_names": ["production"],
+  "actor": "Phil Austin"
+}
+```
+
+`dr.approved` (approval slot filled):
+
+```json
+{
+  "event_type": "dr.approved",
+  "occurred_at": "2026-05-25T09:22:11.004321+00:00",
+  "dr_id": "7f3a1b2c-4d5e-6f7a-8b9c-0d1e2f3a4b5c",
+  "dr_name": "Q4 2025 Release",
+  "dr_url": "https://app.versioner.io/deployment-requests/7f3a1b2c-4d5e-6f7a-8b9c-0d1e2f3a4b5c",
+  "status": "in_progress",
+  "environment_names": ["production"],
+  "actor": "Jane Smith",
+  "approval_type": "qa",
+  "approver_role": "qa_engineer",
+  "slot_status": "approved",
+  "comments": "All regression tests passed."
+}
+```
+
+`version.approved`:
+
+```json
+{
+  "event_type": "version.approved",
+  "occurred_at": "2026-05-25T08:55:44.112233+00:00",
+  "version_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "product_name": "api-service",
+  "version": "2.4.1",
+  "approval_type": "qa",
+  "approver_role": "qa_engineer",
+  "environment_name": "staging",
+  "comments": "Load tests passed, ready for production.",
+  "actor": "Jane Smith"
 }
 ```
 
